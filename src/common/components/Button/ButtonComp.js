@@ -21,9 +21,11 @@ export const ButtonComp = ({
             {icon}
             {text}
         </div>
-        {!!tooltipText && <Tooltip anchorId={id}
-                  place={"bottom"}
-                  content={tooltipText}
+        {!!tooltipText && <Tooltip
+            anchorId={id}
+            place={"bottom"}
+            content={tooltipText}
+            delayShow={500}
         />}
     </div>
 }
