@@ -21,7 +21,7 @@ const App = () => {
             />
         </div>
         {isAuthenticated ? "AUTH: YES" : "AUTH: NO"}
-
+1
     </div>
 }
 
