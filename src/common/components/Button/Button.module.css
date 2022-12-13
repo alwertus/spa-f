@@ -1,0 +1,37 @@
+.wrapper{
+    margin: 2px;
+    height: 2em;
+    display: flex;
+    user-select: none;
+    cursor: pointer;
+}
+
+.reverse {
+    flex-direction: row-reverse;
+}
+
+.element {
+    display: flex;
+    padding: 2px 4px;
+    border: 1px solid #d3d3d3;
+    border-radius: 4px;
+    font-weight: bold;
+    color: var(--main-text-color);
+    background-color: var(--bg-color);
+    transition: color .3s, background-color .3s;
+    align-items: center;
+}
+
+.element:hover {
+    background-color: var(--main-text-color);
+    color: var(--bg-color);
+}
+
+.element path{
+    fill: var(--main-text-color);
+    transition: fill .3s;
+}
+
+.element:hover path {
+    fill: var(--bg-color);
+}
