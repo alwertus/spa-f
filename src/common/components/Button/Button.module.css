@@ -4,6 +4,7 @@
     display: flex;
     user-select: none;
     cursor: pointer;
+    position: relative;
 }
 
 .reverse {
@@ -34,4 +35,22 @@
 
 .element:hover path {
     fill: var(--bg-color);
+}
+
+.tooltip {
+    pointer-events: none;
+    position: absolute;
+    /*visibility: hidden;*/
+    /*opacity: 0;*/
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+    transition-property: opacity;
+    background-color: black;
+    color: #fff;
+    top: 110%;
+    width: 4em;
+}
+.wrapper:hover .tooltip {
+    /*visibility: visible;*/
+    /*opacity: 1;*/
 }
