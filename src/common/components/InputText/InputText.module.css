@@ -1,0 +1,41 @@
+.wrapper {
+    min-height: 2em;
+    position: relative;
+    display: flex;
+}
+.placeholder {
+    position: absolute;
+    color: #5d5b5b;
+    left: 5px;
+    font-size: 0.8em;
+    pointer-events: none;
+    padding: 2px;
+    border-radius: 4px;
+    text-transform: capitalize;
+}
+.placeholderNormal {
+    top: 8px;
+    background-color: transparent !important;
+    transition: top 0.3s, color 0.5s, font-size 0.5s;
+}
+.placeholderRaise {
+    top: -10px;
+    color: #939393;
+    font-size: 0.7em;
+    transition: top 0.3s, color 0.5s, font-size 0.5s;
+}
+
+.input {
+    flex: 1;
+    padding: 0 5px;
+    border: none;
+    background-color: #00000005;
+    border-radius: 4px;
+    min-height: 2em;
+    font-size: 1.1em;
+}
+.input:focus {
+    color: #0a1c74;
+    outline: none;
+    background-color: #00000009;
+}

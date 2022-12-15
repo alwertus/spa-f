@@ -1,9 +1,7 @@
 .wrapper{
-    margin: 2px;
     height: 2em;
     display: flex;
     user-select: none;
-    cursor: pointer;
     position: relative;
 }
 
@@ -12,6 +10,7 @@
 }
 
 .element {
+    cursor: pointer;
     display: flex;
     padding: 2px 4px;
     border: 1px solid #d3d3d3;

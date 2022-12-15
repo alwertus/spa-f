@@ -1,27 +1,37 @@
 import style from './App.module.css';
-import {useState} from "react";
-import {sendMsg} from "../common/SendMsg";
+import {Route, Routes, useNavigate} from 'react-router-dom'
 import {ButtonComp} from "../common/components/Button/ButtonComp";
 import {ReactComponent as AccountIcon} from "../common/img/account.svg"
+import {LoginComp} from "../pages/Login/LoginComp";
+import {MainComp} from "../pages/Main/MainComp";
 
 const App = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    // const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const history = useNavigate()
 
-    function loginOnClick() {
+/*    function loginOnClick() {
         sendMsg()
-    }
+    }*/
 
     return <div className={style.wrapper}>
         <div className={style.topLine}>
-            <div>TOP LINE</div>
+            <ButtonComp
+                text={"Main"}
+                onClick={() => history("/")}
+            />
             <ButtonComp
                 tooltipText={"Login"}
-                onClick={loginOnClick}
+                onClick={() => history("/login")}
                 icon={<AccountIcon/>}
             />
         </div>
-        {isAuthenticated ? "AUTH: YES" : "AUTH: NO"}
 
+        <div className={style.pageContent}>
+            <Routes>
+                <Route path={"/"} element={<MainComp/>}/>
+                <Route path={"/login"} element={<LoginComp/>}/>
+            </Routes>
+        </div>
     </div>
 }
 

@@ -15,9 +15,9 @@ export const ButtonComp = ({
     const reverseStyle = iconPosition === ELEMENT_POSITION.AFTER ? style.reverse : ""
     const id = useId()
 
-    return <div id={id}
-        className={style.wrapper} onClick={onClick}>
-        <div className={`${style.element} ${reverseStyle}`}>
+    return <div id={id} className={style.wrapper}>
+
+        <div className={`${style.element} ${reverseStyle}`} onClick={onClick}>
             {icon}
             {text}
         </div>
