@@ -2,10 +2,11 @@ import React, {useState} from "react";
 import style from "./InputText.module.css";
 
 export const InputTextComp = ({
-    title = "",
-    defaultText = "",
-    acceptChanges = () => {},
-    type = "text",
+                                  title = "",
+                                  defaultText = "",
+                                  acceptChanges = () => {},
+                                  type = "text",
+                                  onKeyPress = () => {},
 
 }) => {
     const [focus, setFocus] = useState(false)
@@ -25,7 +26,13 @@ export const InputTextComp = ({
                value={text}
                onFocus={() => setFocus(true)}
                onBlur={onAccept}
+               onKeyDown={(e) => {
+                   if (e.key === 'Enter') {
+                       onAccept()
+                   }
+               }}
                onChange={(e) => setText(e.target.value)}
+               onKeyPress={onKeyPress}
         />
     </div>
 }

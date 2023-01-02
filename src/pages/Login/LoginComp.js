@@ -12,17 +12,27 @@ export const LoginComp = ({   setUserData,
     const [password, setPassword] = useState("")
     const history = useNavigate()
 
+    const onClickEnter = () => {
+        signIn(login, password, setIsAuthenticated, setUserData)
+    }
+
+    const onKeyPressTextField = (event) => {
+        if (event.key === "Enter") {
+            onClickEnter()
+        }
+    }
+
     return <div className={style.wrapper}>
         <div className={style.window}>
             <div className={style.title}><h2>Sign in</h2></div>
 
             <div className={style.box}><InputTextComp title={"Login"} acceptChanges={setLogin}/></div>
-            <div className={style.box}><InputTextComp title={"Password"} acceptChanges={setPassword} type={"password"}/></div>
+            <div className={style.box}><InputTextComp title={"Password"} acceptChanges={setPassword} type={"password"} onKeyPress={onKeyPressTextField}/></div>
 
             <div className={style.panel}>
                 <ButtonComp
                     text={"Enter"}
-                    onClick={() => signIn(login, password, setIsAuthenticated, setUserData)}
+                    onClick={onClickEnter}
                 />
             </div>
         </div>

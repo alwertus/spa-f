@@ -12,6 +12,7 @@ import {LogoutComp} from "../pages/Login/LogoutComp";
 import {getLocalStorageValue} from "../common/LocalStorage";
 import {AUTH} from "../common/Structures";
 import {getUserInfo} from "./AppActions";
+import {PhoneComp} from "../pages/Phone/PhoneComp";
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -29,19 +30,32 @@ const App = () => {
 
     useEffect(loginCheck,[isAuthenticated])
 
+    function hasRole(role) {
+        return !!userData['roles'] && userData['roles'].includes(role)
+    }
+
     return <div className={style.wrapper}>
         <div><Toaster/></div>
         <div className={style.topLine}>
-            <ButtonComp
-                text={"Main"}
-                onClick={() => history("/")}
-            />
+            <div className={style.buttonGroup}>
+                <ButtonComp
+                    text={"Main"}
+                    onClick={() => history("/")}
+                />
+                {hasRole("PAGE_PHONE") && <ButtonComp
+                    tooltipText={"Remote phone"}
+                    text={"Phone"}
+                    onClick={() => history("/phone")}
+                />}
+            </div>
+
             <ButtonComp
                 tooltipText={"Login"}
                 text={userData['login']}
                 onClick={() => history("/login")}
                 icon={<AccountIcon/>}
             />
+
         </div>
 
         <div className={style.pageContent}>
@@ -60,6 +74,7 @@ const App = () => {
                 />
                 <Route path={"/register"} element={<RegisterComp/>}/>
                 <Route path={"/emailConfirm/:secret"} element={<AccountConfirmComp/>}/>
+                {hasRole("PAGE_PHONE") && <Route path={"/phone"} element={<PhoneComp/>}/>}
             </Routes>
         </div>
     </div>
