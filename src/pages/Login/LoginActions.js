@@ -1,8 +1,18 @@
 import {sendMsg} from "../../common/SendMsg";
 import toast from "react-hot-toast";
 
+function emptyCheck(variable, errorMessage) {
+    if (variable === null || variable.trim().length === 0) {
+        toast.error(errorMessage)
+        return false
+    }
+    return true
+}
 
 export function signIn(login, password) {
+    if (   !emptyCheck(login, "Empty login")
+        || !emptyCheck(password, "Empty password")) return
+
     sendMsg("POST",
         "user/login",
         {"login": login, "password": password},
@@ -12,18 +22,12 @@ export function signIn(login, password) {
 }
 
 export function register(login, email, password1, password2, clearFields) {
-    if (login === null || login.trim().length === 0) {
-        toast.error("Empty login")
+    if (   !emptyCheck(login, "Empty login")
+        || !emptyCheck(email, "Empty email")
+        || !emptyCheck(password1, "Empty password")
+        || !emptyCheck(password2, "Empty password (confirmation)"))
         return
-    }
-    if (email === null || email.trim().length === 0) {
-        toast.error("Empty email")
-        return
-    }
-    if (password1 === null || password2 === null || password1.trim().length === 0) {
-        toast.error("Empty password")
-        return
-    }
+
     if (password1 !== password2) {
         toast.error("Password and Password (confirmation) do not match")
         return
