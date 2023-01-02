@@ -5,7 +5,8 @@ import {useState} from "react";
 import {signIn} from "./LoginActions";
 import {useNavigate} from "react-router-dom";
 
-export const LoginComp = () => {
+export const LoginComp = ({   setUserData,
+                              setIsAuthenticated}) => {
 
     const [login, setLogin] = useState("")
     const [password, setPassword] = useState("")
@@ -21,7 +22,7 @@ export const LoginComp = () => {
             <div className={style.panel}>
                 <ButtonComp
                     text={"Enter"}
-                    onClick={() => signIn(login, password)}
+                    onClick={() => signIn(login, password, setIsAuthenticated, setUserData)}
                 />
             </div>
         </div>

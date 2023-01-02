@@ -1,5 +1,7 @@
 import {sendMsg} from "../../common/SendMsg";
 import toast from "react-hot-toast";
+import {setLocalStorageValue} from "../../common/LocalStorage";
+import {AUTH} from "../../common/Structures";
 
 function emptyCheck(variable, errorMessage) {
     if (variable === null || variable.trim().length === 0) {
@@ -9,14 +11,20 @@ function emptyCheck(variable, errorMessage) {
     return true
 }
 
-export function signIn(login, password) {
+export function signIn(login, password, setIsAuthenticated, setUserData) {
     if (   !emptyCheck(login, "Empty login")
-        || !emptyCheck(password, "Empty password")) return
+        || !emptyCheck(password, "Empty password"))
+        return
 
     sendMsg("POST",
         "user/login",
         {"login": login, "password": password},
-        () => {},
+        (response) => {
+            setLocalStorageValue(AUTH.TOKEN, response[AUTH.TOKEN])
+            setLocalStorageValue(AUTH.TOKEN_REFRESH, response[AUTH.TOKEN_REFRESH])
+            setIsAuthenticated(true)
+            setUserData(response[AUTH.USER_DATA])
+        },
         (msg) => toast.error(msg)
     )
 }

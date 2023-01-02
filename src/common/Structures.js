@@ -15,6 +15,7 @@ export const ELEMENT_POSITION = fillStruct("ELEMENT_POSITION", {
 })
 
 export const AUTH = {
-    TOKEN : "accessToken",
+    TOKEN : "token",
     TOKEN_REFRESH : "refreshToken",
+    USER_DATA: "userData",
 }
