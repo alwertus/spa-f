@@ -4,16 +4,14 @@ import {ButtonComp} from "../common/components/Button/ButtonComp";
 import {ReactComponent as AccountIcon} from "../common/img/account.svg"
 import {LoginComp} from "../pages/Login/LoginComp";
 import {MainComp} from "../pages/Main/MainComp";
+import {Toaster} from "react-hot-toast";
 
 const App = () => {
     // const [isAuthenticated, setIsAuthenticated] = useState(false)
     const history = useNavigate()
 
-/*    function loginOnClick() {
-        sendMsg()
-    }*/
-
     return <div className={style.wrapper}>
+        <div><Toaster/></div>
         <div className={style.topLine}>
             <ButtonComp
                 text={"Main"}

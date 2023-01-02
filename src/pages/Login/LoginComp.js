@@ -2,6 +2,8 @@ import style from './Login.module.css';
 import {InputTextComp} from "../../common/components/InputText/InputTextComp";
 import {ButtonComp} from "../../common/components/Button/ButtonComp";
 import {useState} from "react";
+import {signIn} from "./LoginActions";
+import toast from "react-hot-toast";
 
 export const LoginComp = () => {
 
@@ -10,15 +12,15 @@ export const LoginComp = () => {
 
 
     return <div className={style.wrapper}>
-        <h2>Login</h2>
-        <hr/>
+        <div className={style.title}><h2>Login</h2></div>
+
         <div className={style.box}><InputTextComp title={"Login"} acceptChanges={setLogin}/></div>
         <div className={style.box}><InputTextComp title={"Password"} acceptChanges={setPassword} type={"password"}/></div>
 
         <div className={style.panel}>
             <ButtonComp
                 text={"Enter"}
-                onClick={() => console.log("click Login: ", login, password)}
+                onClick={() => signIn(login, password, toast.error)}
             />
         </div>
     </div>

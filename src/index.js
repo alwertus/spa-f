@@ -9,7 +9,4 @@ root.render(
     <BrowserRouter>
         <App/>
     </BrowserRouter>
-  /*<React.StrictMode>
-    <App />
-  </React.StrictMode>*/
 );

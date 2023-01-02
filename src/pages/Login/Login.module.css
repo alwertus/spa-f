@@ -3,7 +3,10 @@
     padding: 10px 15px;
     border: 1px solid #d1d1d1;
     border-radius: 6px;
-    background-color: #f3f3f3;
+    background-color: #fdfdfd;
+}
+.title {
+    margin-bottom: 10px;
 }
 .box {
     margin-bottom: 10px;

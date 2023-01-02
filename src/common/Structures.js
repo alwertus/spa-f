@@ -13,3 +13,8 @@ export const ELEMENT_POSITION = fillStruct("ELEMENT_POSITION", {
     BEFORE : "",
     AFTER: "",
 })
+
+export const AUTH = {
+    TOKEN : "accessToken",
+    TOKEN_REFRESH : "refreshToken",
+}
