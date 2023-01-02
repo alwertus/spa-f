@@ -6,8 +6,14 @@ import {AUTH} from "./Structures";
 const DEBUG = true
 const SERVER_PORT = 9000
 const SERVER_ADDRESS = (window.location.port > 0 ? window.location.origin.replace((":" + window.location.port), "") : window.location.origin) + ":" + SERVER_PORT
+
 const headers = new Headers()
 headers.append("Content-Type", "application/json")
+
+const statusActions = new Map()
+statusActions.set(400, (rs, success, error) => {error(rs['description'])})
+statusActions.set(200, (rs, success, error) => {success(rs)})
+
 
 export function sendMsg(method,
                         destination,
@@ -17,29 +23,22 @@ export function sendMsg(method,
                         ) {
     const url = SERVER_ADDRESS + "/" + destination
     const token = getLocalStorageValue(AUTH.TOKEN)
-    const resultErr = errorText => {
-        errorHandler(errorText)
-        if (DEBUG) console.error(errorText)
-    }
-
     if (!!token) headers.append("Authorization", token)
 
-    if (DEBUG) console.log(">> SEND MESSAGE [" + method + "] " + url, bodyObj)
-
-    const jsonHandler = (rs) => {
+    const answerIsJson = (rs) => {
         if (DEBUG) console.log("<< Response JSON (" + rsStatus + ")", rs)
-        if (rsStatus === 400)
-            errorHandler(rs['description'])
+        statusActions.get(rsStatus)(rs, successHandler, errorHandler)
     }
 
-    const textHandler = (text) => {
+    const answerIsText = (text) => {
         if (DEBUG) console.error("<< Response TEXT (" + rsStatus + ")", text)
         errorHandler(text)
     }
 
+    if (DEBUG) console.log(">> Send message [" + method + "] " + url, bodyObj)
     let rsStatus = 0;
     fetch(url,{
-        method: "POST",
+        method: method,
         headers: headers,
         body: JSON.stringify(bodyObj)
 
@@ -50,11 +49,11 @@ export function sendMsg(method,
         .then((response) => {
             try {
                 const data = JSON.parse(response)
-                jsonHandler(data)
+                answerIsJson(data)
             } catch (err) {
-                textHandler(response)
+                answerIsText(response)
             }
         }).catch( e => {
-        resultErr("<< ERROR" + e)
+        errorHandler("<< ERROR" + e)
     });
 }
