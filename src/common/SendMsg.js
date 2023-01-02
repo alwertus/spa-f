@@ -12,7 +12,7 @@ headers.append("Content-Type", "application/json")
 
 const statusActions = new Map()
 statusActions.set(400, (rs, success, error) => {error(rs['description'])})
-statusActions.set(200, (rs, success, error) => {success(rs)})
+statusActions.set(200, (rs, success) => {success(rs)})
 
 
 export function sendMsg(method,
