@@ -1,4 +1,8 @@
 .wrapper {
+
+}
+
+.window {
     margin-top: 50px;
     padding: 10px 15px;
     border: 1px solid #d1d1d1;
@@ -14,4 +18,16 @@
 .panel {
     display: flex;
     justify-content: flex-end;
+}
+.links {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.link {
+    color: #0054ad;
+    text-decoration: underline;
+    cursor: pointer;
+    user-select: none;
 }

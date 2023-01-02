@@ -5,6 +5,7 @@ import {ReactComponent as AccountIcon} from "../common/img/account.svg"
 import {LoginComp} from "../pages/Login/LoginComp";
 import {MainComp} from "../pages/Main/MainComp";
 import {Toaster} from "react-hot-toast";
+import {RegisterComp} from "../pages/Login/RegisterComp";
 
 const App = () => {
     // const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -28,6 +29,7 @@ const App = () => {
             <Routes>
                 <Route path={"/"} element={<MainComp/>}/>
                 <Route path={"/login"} element={<LoginComp/>}/>
+                <Route path={"/register"} element={<RegisterComp/>}/>
             </Routes>
         </div>
     </div>
