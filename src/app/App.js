@@ -6,6 +6,7 @@ import {LoginComp} from "../pages/Login/LoginComp";
 import {MainComp} from "../pages/Main/MainComp";
 import {Toaster} from "react-hot-toast";
 import {RegisterComp} from "../pages/Login/RegisterComp";
+import {AccountConfirmComp} from "../pages/AccountConfirm/AccountConfirmComp";
 
 const App = () => {
     // const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -30,6 +31,7 @@ const App = () => {
                 <Route path={"/"} element={<MainComp/>}/>
                 <Route path={"/login"} element={<LoginComp/>}/>
                 <Route path={"/register"} element={<RegisterComp/>}/>
+                <Route path={"/emailConfirm/:secret"} element={<AccountConfirmComp/>}/>
             </Routes>
         </div>
     </div>

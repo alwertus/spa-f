@@ -11,8 +11,17 @@ const headers = new Headers()
 headers.append("Content-Type", "application/json")
 
 const statusActions = new Map()
-statusActions.set(400, (rs, success, error) => {error(rs['description'])})
 statusActions.set(200, (rs, success) => {success(rs)})
+statusActions.set(400, (rs, success, error) => {error(rs['description'])})
+statusActions.set(403, (rs, success, error) => {error("Forbidden")})
+
+function addParamsToUrl(url, params) {
+    const u = new URL(url)
+    for (const [key, value] of Object.entries(params)) {
+        u.searchParams.append(key, String(value))
+    }
+    return u.href
+}
 
 
 export function sendMsg(method,
@@ -21,7 +30,11 @@ export function sendMsg(method,
                         successHandler = () => {},
                         errorHandler = () => {},
                         ) {
-    const url = SERVER_ADDRESS + "/" + destination
+    let url = SERVER_ADDRESS + "/" + destination
+    if (method === "GET") {
+        url = addParamsToUrl(url, bodyObj)
+    }
+
     const token = getLocalStorageValue(AUTH.TOKEN)
     if (!!token) headers.append("Authorization", token)
 
@@ -32,17 +45,18 @@ export function sendMsg(method,
 
     const answerIsText = (text) => {
         if (DEBUG) console.error("<< Response TEXT (" + rsStatus + ")", text)
-        errorHandler(text)
+        statusActions.get(rsStatus)(text, successHandler, errorHandler)
     }
 
-    if (DEBUG) console.log(">> Send message [" + method + "] " + url, bodyObj)
+    if (DEBUG) console.warn(">> Send message [" + method + "] " + url, method === "GET" ? "" : bodyObj)
     let rsStatus = 0;
-    fetch(url,{
-        method: method,
-        headers: headers,
-        body: JSON.stringify(bodyObj)
-
-    })
+    fetch(url,
+        method === "GET"
+            ? { method: method, headers: headers }
+            : { method: method,
+                headers: headers,
+                body: JSON.stringify(bodyObj)}
+    )
         .then((response) => {
             rsStatus = response.status
             return response.text()})
