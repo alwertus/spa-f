@@ -7,13 +7,27 @@ import {MainComp} from "../pages/Main/MainComp";
 import {Toaster} from "react-hot-toast";
 import {RegisterComp} from "../pages/Login/RegisterComp";
 import {AccountConfirmComp} from "../pages/AccountConfirm/AccountConfirmComp";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {LogoutComp} from "../pages/Login/LogoutComp";
+import {getLocalStorageValue} from "../common/LocalStorage";
+import {AUTH} from "../common/Structures";
+import {getUserInfo} from "./AppActions";
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [userData, setUserData] = useState({})
     const history = useNavigate()
+
+    const loginCheck = () => {
+        if (!isAuthenticated) {
+            let token = getLocalStorageValue(AUTH.TOKEN)
+            if (!!token) {
+                getUserInfo(token, setIsAuthenticated, setUserData)
+            }
+        }
+    }
+
+    useEffect(loginCheck,[isAuthenticated])
 
     return <div className={style.wrapper}>
         <div><Toaster/></div>
