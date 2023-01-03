@@ -1,19 +1,13 @@
 /* !!! All requests must be use this method !!! */
 
-import {getLocalStorageValue} from "./LocalStorage";
+import {getLocalStorageValue, setLocalStorageValue} from "./LocalStorage";
 import {AUTH} from "./Structures";
+import toast from "react-hot-toast";
 
 const DEBUG = true
 const SERVER_PORT = 9000
 const SERVER_ADDRESS = (window.location.port > 0 ? window.location.origin.replace((":" + window.location.port), "") : window.location.origin) + ":" + SERVER_PORT
-
-const headers = new Headers()
-headers.append("Content-Type", "application/json")
-
-const statusActions = new Map()
-statusActions.set(200, (rs, success) => {success(rs)})
-statusActions.set(400, (rs, success, error) => {error(rs['description'])})
-statusActions.set(403, (rs, success, error) => {error("Forbidden")})
+const MSG_DESCRIPTION = "description"
 
 function addParamsToUrl(url, params) {
     const u = new URL(url)
@@ -29,26 +23,60 @@ export function sendMsg(method,
                         bodyObj,
                         successHandler = () => {},
                         errorHandler = () => {},
+                        isResending = false,
+                        useRefreshToken = false,
                         ) {
+    // prepare url
     let url = SERVER_ADDRESS + "/" + destination
     if (method === "GET") {
         url = addParamsToUrl(url, bodyObj)
     }
 
-    const token = getLocalStorageValue(AUTH.TOKEN)
+    // prepare headers
+    const token = getLocalStorageValue(useRefreshToken ? AUTH.TOKEN_REFRESH : AUTH.TOKEN)
+    const headers = new Headers()
+    headers.append("Content-Type", "application/json")
     if (!!token) headers.append("Authorization", token)
 
+    // result status reactions
+    const statusActions = new Map()
+    statusActions.set(200, (rs) => {successHandler(rs)})
+    statusActions.set(400, (rs) => {errorHandler(rs[MSG_DESCRIPTION])})
+    statusActions.set(401, (rs) => {
+        if (rs[MSG_DESCRIPTION].startsWith("The Token has expired") && !isResending) {
+            sendMsg("POST",
+                "user/update-token",
+                {},
+                (response) => {
+                    setLocalStorageValue(AUTH.TOKEN, response[AUTH.TOKEN])
+                    setLocalStorageValue(AUTH.TOKEN_REFRESH, response[AUTH.TOKEN_REFRESH])
+
+                    sendMsg(method, destination, bodyObj, successHandler, errorHandler, true)
+                },
+                (msg) => toast.error(msg),
+                true,
+                true
+            )
+        } else {
+            errorHandler(rs[MSG_DESCRIPTION])
+        }
+    })
+    statusActions.set(403, () => {errorHandler("Forbidden")})
+
+    // handler if answer is json
     const answerIsJson = (rs) => {
         if (DEBUG) console.log("<< Response JSON (" + rsStatus + ")", rs)
-        statusActions.get(rsStatus)(rs, successHandler, errorHandler)
+        statusActions.get(rsStatus)(rs)
     }
 
+    // handler if answer is text
     const answerIsText = (text) => {
         if (DEBUG) console.error("<< Response TEXT (" + rsStatus + ")", text)
-        statusActions.get(rsStatus)(text, successHandler, errorHandler)
+        statusActions.get(rsStatus)(text)
     }
 
-    if (DEBUG) console.warn(">> Send message [" + method + "] " + url, method === "GET" ? "" : bodyObj)
+    // fetch
+    if (DEBUG) console.warn(">> Send " + (isResending ? "resending " : "") + "message [" + method + "] " + url, method === "GET" ? "" : bodyObj)
     let rsStatus = 0;
     fetch(url,
         method === "GET"
