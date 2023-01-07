@@ -3,6 +3,7 @@
     display: flex;
     user-select: none;
     position: relative;
+    flex-direction: column;
 }
 
 .reverse {
