@@ -9,7 +9,7 @@ import {str} from "../../common/Language";
 export const FeedingComp = ({}) => {
     const [isPageCreated, setIsPageCreated] = useState(false)
 
-    useEffect(() => !isPageCreated && getAccessStatus(setIsPageCreated), [isPageCreated])
+    useEffect(() => {if (!isPageCreated) getAccessStatus(setIsPageCreated)}, [isPageCreated])
 
     if (isPageCreated)
         return <FeedingDataComp/>
