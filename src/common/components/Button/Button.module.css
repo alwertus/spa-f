@@ -1,5 +1,5 @@
 .wrapper{
-    height: 2em;
+    min-height: 2em;
     display: flex;
     user-select: none;
     position: relative;
@@ -11,6 +11,7 @@
 }
 
 .element {
+    flex: 1;
     cursor: pointer;
     display: flex;
     padding: 2px 4px;
