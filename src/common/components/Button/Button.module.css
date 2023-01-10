@@ -2,7 +2,6 @@
     min-height: 2em;
     display: flex;
     user-select: none;
-    position: relative;
     flex-direction: column;
 }
 

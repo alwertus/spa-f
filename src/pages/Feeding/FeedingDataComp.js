@@ -79,14 +79,14 @@ export const FeedingDataComp = () => {
                 className={style.actionsButton}
                 size={"Big"}
                 icon={lastChest === "L" ? breast.chestInBraLeft : breast.breastLeft}
-                tooltip={str("Left")}
+                tooltipText={str("Left")}
                 onClick={() => newTimer("L", updateData)}
             />
             <ButtonComp
                 className={style.actionsButton}
                 size={"Big"}
                 icon={lastChest === "R" ? breast.chestInBraRight : breast.breastRight}
-                tooltip={str("Right")}
+                tooltipText={str("Right")}
                 onClick={() => newTimer("R", updateData)}
             />
         </div>

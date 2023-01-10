@@ -1,29 +1,24 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import style from "./Phone.module.css";
 import {SmsComp} from "./SmsComp";
-import {ReactComponent as RefreshIcon} from "../../common/img/refresh.svg"
-import {ButtonComp} from "../../common/components/Button/ButtonComp";
 import {getSmsList} from "./PhoneActions";
 
 export const PhoneComp = () => {
-    const [smsList, setSmsList] = useState([
-        {"id":0, "sender":"+70001110000", "text":"bla bla bla ooooo 1"},
-        {"id":1, "sender":"+70001110001", "text":"bla bla bla ooooo 2"},
-    ])
+    const [smsList, setSmsList] = useState([])
+
+    useEffect(() => {
+        if (!smsList || smsList.length === 0)
+            getSmsList(setSmsList)
+    }, [])
 
     return <div className={style.wrapper}>
 
-        <ButtonComp
-            tooltipText={"Refresh sms list"}
-            onClick={() => getSmsList(setSmsList)}
-            icon={<RefreshIcon/>}
-        />
-
         <div className={style.smsList}>
-            {smsList.map(e => <SmsComp
-                key={e.id}
-                sms={e}
-            />)}
+            {smsList
+                .sort((a, b) => b['created'] - a['created'] - (!!b['read'] ? 999999999 : 0) + (!!a['read'] ? 999999999 : 0))
+                .map(e => <SmsComp key={e.id} sms={e} updateSmsHandler={() => getSmsList(setSmsList)}/>)
+            }
         </div>
+
     </div>
 }

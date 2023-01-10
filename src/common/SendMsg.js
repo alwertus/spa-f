@@ -2,7 +2,6 @@
 
 import {getLocalStorageValue, setLocalStorageValue} from "./LocalStorage";
 import {AUTH} from "./Structures";
-import toast from "react-hot-toast";
 
 const DEBUG = true
 const SERVER_PORT = 9000
@@ -54,7 +53,11 @@ export function sendMsg(method,
 
                     sendMsg(method, destination, bodyObj, successHandler, errorHandler, true)
                 },
-                (msg) => toast.error(msg),
+                (msg) => {
+                    setLocalStorageValue(AUTH.TOKEN, null, true)
+                    setLocalStorageValue(AUTH.TOKEN_REFRESH, null, true)
+                    errorHandler("Resending error - " + msg)
+                },
                 true,
                 true
             )
@@ -72,7 +75,11 @@ export function sendMsg(method,
 
     // handler if answer is text
     const answerIsText = (text) => {
-        if (DEBUG) console.error("<< Response TEXT (" + rsStatus + ")", text)
+        if (DEBUG) {
+            if (rsStatus === 200) console.log("<< Response (" + rsStatus + ")", text)
+            else console.error("<< Response TEXT (" + rsStatus + ")", text)
+        }
+
         statusActions.get(rsStatus)(text)
     }
 
