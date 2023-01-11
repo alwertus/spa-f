@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import style from "./Phone.module.css";
 import {SmsComp} from "./SmsComp";
 import {getSmsList} from "./PhoneActions";
+import {ButtonComp} from "../../common/components/Button/ButtonComp";
+import {ReactComponent as RefreshIcon} from "../../common/img/refresh.svg"
 
 export const PhoneComp = () => {
     const [smsList, setSmsList] = useState([])
@@ -12,6 +14,14 @@ export const PhoneComp = () => {
     }, [])
 
     return <div className={style.wrapper}>
+
+        <div className={style.panelActions}>
+            <ButtonComp
+                tooltipText={"Refresh sms list"}
+                onClick={() => getSmsList(setSmsList)}
+                icon={<RefreshIcon/>}
+            />
+        </div>
 
         <div className={style.smsList}>
             {smsList

@@ -27,7 +27,10 @@ export const FeedingComp = ({}) => {
             <InputTextComp
                 title={str("Use access string")}
                 hideOkBtn={false} // TODO: make this function
-                acceptChanges={(newVal) => setInviteString(newVal, setIsPageCreated)}
+                acceptChanges={(newVal) => {
+                    if (!!newVal)
+                        setInviteString(newVal, setIsPageCreated)
+                }}
             />
 
         </div>

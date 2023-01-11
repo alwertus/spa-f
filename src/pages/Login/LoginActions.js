@@ -16,6 +16,9 @@ export function signIn(login, password, setIsAuthenticated, setUserData) {
         || !emptyCheck(password, "Empty password"))
         return
 
+    setLocalStorageValue(AUTH.TOKEN, null, true)
+    setLocalStorageValue(AUTH.TOKEN_REFRESH, null, true)
+
     sendMsg("POST",
         "user/login",
         {"login": login, "password": password},
