@@ -5,12 +5,16 @@
     align-items: center;
 }
 .panelActions {
-    min-width: 30em;
+    min-width: 40em;
+    margin-top: 20px;
 }
 .smsList {
-    width: 30em;
+    width: 40em;
     display: flex;
     flex-direction: column;
     flex: 1;
     margin-bottom: 2em;
+}
+.element {
+    margin-bottom: 5px;
 }

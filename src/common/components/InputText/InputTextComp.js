@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import style from "./InputText.module.css";
 
 export const InputTextComp = ({
@@ -16,6 +16,10 @@ export const InputTextComp = ({
         setFocus(false)
         acceptChanges(text)
     }
+
+    useEffect(() => {
+        setText(defaultText)
+    },[defaultText])
 
     return <div className={style.wrapper}>
         <div className={`${style.placeholder} ${focus || !!text ? style.placeholderRaise : style.placeholderNormal}`}>

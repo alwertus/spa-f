@@ -17,17 +17,21 @@ export const SmsComp = ({sms, updateSmsHandler}) => {
     }
 
     return <div className={`${style.wrapper} ${sms['read'] ? style.readTrue : style.readFalse}`}>
-        <div className={style.blockSms} onClick={readSms}>
+        <div className={style.blockSms}>
             <div className={style.line}>
                 <div className={style.smsSender}>{!!sms['created'] ? (new Date(sms['created'])).toLocaleString() : "no_date"}</div>
-                <div className={style.smsSender}>{sms.sender}</div>
+                <div className={style.smsSender}>{sms['number']}</div>
             </div>
             <div className={style.line}>
-                <div className={style.smsText}>{sms.message}</div>
+                <div className={style.smsText}>{sms['message']}</div>
             </div>
         </div>
 
         <div className={style.blockActions}>
+            {!sms['read'] && <ButtonComp
+                text={"read"}
+                onClick={readSms}
+            />}
             <ButtonComp
                 text={"DEL"}
                 onClick={deleteHandler}
