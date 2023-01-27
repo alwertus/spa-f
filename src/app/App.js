@@ -14,6 +14,7 @@ import {AUTH} from "../common/Structures";
 import {getUserInfo} from "./AppActions";
 import {PhoneComp} from "../pages/Phone/PhoneComp";
 import {FeedingComp} from "../pages/Feeding/FeedingComp";
+import {InfoComp} from "../pages/Info/InfoComp";
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -43,11 +44,11 @@ const App = () => {
                     text={"Main"}
                     onClick={() => history("/")}
                 />
-                {/*{hasRole("PAGE_INFO") && <ButtonComp
+                {hasRole("PAGE_INFO") && <ButtonComp
                     tooltipText={"Knowledge base"}
                     text={"Info"}
                     onClick={() => history("/info")}
-                />}*/}
+                />}
                 {hasRole("PAGE_FEEDING") && <ButtonComp
                     tooltipText={"Baby feeding"}
                     text={"Feeding"}
@@ -85,7 +86,7 @@ const App = () => {
                 />
                 <Route path={"/register"} element={<RegisterComp/>}/>
                 <Route path={"/emailConfirm/:secret"} element={<AccountConfirmComp/>}/>
-                {/*{hasRole("PAGE_INFO") && <Route path={"/info"} element={<InfoComp/>}/>}*/}
+                {hasRole("PAGE_INFO") && <Route path={"/info"} element={<InfoComp/>}/>}
                 {hasRole("PAGE_PHONE") && <Route path={"/phone"} element={<PhoneComp/>}/>}
                 {hasRole("PAGE_FEEDING") && <Route path={"/feeding"} element={<FeedingComp/>}/>}
             </Routes>
