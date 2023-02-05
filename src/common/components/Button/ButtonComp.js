@@ -10,12 +10,15 @@ export const ButtonComp = ({
     onClick,
     icon,
     iconPosition = ELEMENT_POSITION.BEFORE,
-    tooltipText
+    tooltipText,
+    minWidth = null,
 }) => {
     const reverseStyle = iconPosition === ELEMENT_POSITION.AFTER ? style.reverse : ""
     const id = useId()
 
-    return <div id={id} className={style.wrapper}>
+    const customStyle = !!minWidth ? {minWidth: minWidth} : {}
+
+    return <div id={id} className={style.wrapper} style={customStyle}>
 
         <div className={`${style.element} ${reverseStyle}`} onClick={onClick}>
             {icon}

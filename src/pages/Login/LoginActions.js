@@ -28,7 +28,9 @@ export function signIn(login, password, setIsAuthenticated, setUserData) {
             setIsAuthenticated(true)
             setUserData(response[AUTH.USER_DATA])
         },
-        (msg) => toast.error(msg)
+        (msg) => {
+            toast.error(msg)
+        }
     )
 }
 
@@ -53,6 +55,8 @@ export function register(login, email, password1, password2, clearFields) {
             toast.success(msg['message'])
             clearFields()
         },
-        (msg) => toast.error(msg)
+        (msg) => {
+            toast.error(msg)
+        }
     )
 }

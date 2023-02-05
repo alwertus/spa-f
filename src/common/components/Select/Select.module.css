@@ -1,0 +1,32 @@
+.wrapper {
+    user-select: none;
+    cursor: pointer;
+}
+.selected {
+    padding: 0 10px;
+    min-height: 2.1em;
+    min-width: 10em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #00000005;
+}
+.openOptions {
+    padding: 0 4px;
+    display: flex;
+}
+.options {
+    position: absolute;
+    min-width: 10em;
+    animation: showOptions 0.2s forwards;
+    max-height: 0;
+}
+
+@keyframes showOptions {
+    from {
+        transform: scaleY(0);
+    }
+    to {
+        transform: scaleY(100%);
+    }
+}

@@ -1,0 +1,8 @@
+.wrapper {
+    border-bottom: 1px solid #bebebe;
+    padding: 4px;
+    background-color: #fdfdfd;
+}
+.wrapper:hover {
+    background-color: #d3f3ff;
+}

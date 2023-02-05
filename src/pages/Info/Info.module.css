@@ -1,3 +1,20 @@
 .wrapper {
-
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin: 2px 0;
+}
+.pagePart {
+    display: flex;
+}
+.actionElement {
+    margin-left: 5px;
+}
+.modalWindow {
+    padding: 10px;
+}
+.modalElement {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
 }

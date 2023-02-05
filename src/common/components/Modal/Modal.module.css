@@ -1,0 +1,23 @@
+.wrapper {
+    background-color: #ddddddad;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: showAnim 0.5s forwards;
+}
+.container {
+    box-shadow: #b4c1cd9e 2px 3px 7px 1px;
+    padding: 4px;
+    border-radius: 6px;
+    background-color: #fbfbfb;
+}
+
+@keyframes showAnim {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
