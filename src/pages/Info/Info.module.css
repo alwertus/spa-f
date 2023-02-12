@@ -18,3 +18,28 @@
     display: flex;
     justify-content: flex-end;
 }
+.modalContent {
+}
+.listItemWrapper {
+    display: flex;
+    flex-direction: column;
+}
+.listItemRow {
+    display: flex;
+    min-height: 2em;
+    background: linear-gradient(0deg, #00000000 10%, #936d912e 50%, #00000000 90%);
+    border-radius: 6px;
+}
+.listItemPageName {
+    margin-left: 10px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.listItemChildren {
+    margin-left: 15px;
+}
+.radio {
+    margin: 2px;
+}

@@ -4,7 +4,7 @@ import {ButtonComp} from "../../common/components/Button/ButtonComp";
 import {deleteSpace, updateSpace} from "./InfoActions";
 import toast from "react-hot-toast";
 import {ModalComp} from "../../common/components/Modal/ModalComp";
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 export const EditSpaceModal = ({
                                    openModal,
@@ -12,10 +12,17 @@ export const EditSpaceModal = ({
                                    currentSpace,
                                    updateSpaceList
                                  }) => {
+    const [original, setOriginal] = useState(currentSpace['title'])
+
+    useEffect(() => {setOriginal(currentSpace['title'])}, [currentSpace['title']])
 
     if (!currentSpace) {
         closeModal()
         return <div/>
+    }
+    function exitAndDiscard() {
+        currentSpace['title'] = original
+        closeModal()
     }
 
 
@@ -49,7 +56,7 @@ export const EditSpaceModal = ({
                         text={"Cancel"}
                         minWidth={"5em"}
                         tooltipText={"Cancel creating Space"}
-                        onClick={closeModal}
+                        onClick={exitAndDiscard}
                     />
                     <ButtonComp
                         text={"Apply"}
@@ -57,7 +64,8 @@ export const EditSpaceModal = ({
                         tooltipText={"Edit Space"}
                         onClick={() => {
                             console.log("New object: ", currentSpace)
-                            updateSpace(currentSpace, () => {
+                            updateSpace(currentSpace, (e) => {
+                                updateSpaceList(e)
                                 toast.success("Updated")
                             })
                             // TODO: change active space name to new
@@ -66,6 +74,6 @@ export const EditSpaceModal = ({
                     />
                 </div>
             </div>}
-        onClickOutsideHandler={closeModal}
+        onClickOutsideHandler={exitAndDiscard}
     />
 }

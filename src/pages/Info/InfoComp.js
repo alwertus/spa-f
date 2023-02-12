@@ -5,12 +5,15 @@ import {ReactComponent as LockOpenIcon} from "../../common/img/lock-open.svg"
 import {ReactComponent as LockCloseIcon} from "../../common/img/lock-close.svg"
 import {ReactComponent as OptionsIcon} from "../../common/img/options.svg"
 import {ReactComponent as AddIcon} from "../../common/img/plus.svg"
+import {ReactComponent as PageListIcon} from "../../common/img/list-ul.svg"
 import {useNavigate, useParams} from "react-router-dom";
 import {SelectComp} from "../../common/components/Select/SelectComp";
 import {getSpacesList} from "./InfoActions";
 import toast from "react-hot-toast";
 import {CreateSpaceModal} from "./CreateSpaceModal";
 import {EditSpaceModal} from "./EditSpaceModal";
+import {PageListModal} from "./PageListModal";
+import {PageComp} from "./Page/PageComp";
 
 const PRIVATE = "private"
 const PUBLIC = "public"
@@ -19,6 +22,7 @@ export const InfoComp = () => {
     // common attrs
     const {visibility} = useParams()
     const {spaceId} = useParams()
+    // const {pageId} = useParams()
     const history = useNavigate()
     const [isPrivate, setIsPrivate] = useState(visibility === PRIVATE)
     const [spaceList, setSpaceList] = useState([])
@@ -28,17 +32,33 @@ export const InfoComp = () => {
     const [newSpaceName, setNewSpaceName] = useState("")
     const [openModal_createSpace, setOpenModal_createSpace] = useState(false)
     const [openModal_editSpace, setOpenModal_editSpace] = useState(false)
+    const [openModal_pageList, setOpenModal_pageList] = useState(false)
 
+    function generateHistoryPathByPageId(pageId, space = selectedSpace) {
+        let path = "/info/" + (isPrivate ? PRIVATE : PUBLIC)
+        if (!!space) {
+            path += "/" + space['id']
+            if (!!pageId) {
+                path += "/" + pageId
+            }
+        }
+        return path
+    }
 
     function selectSpace(space) {
         console.log("Select space=", space)
         setSelectedSpace(space)
-        if (!!space) {
+        history(generateHistoryPathByPageId(null, space))
+        /*if (!!space) {
             history("/info/" + (isPrivate ? PRIVATE : PUBLIC) + "/" + space['id'])
         } else {
             history("/info/" + (isPrivate ? PRIVATE : PUBLIC))
-        }
+        }*/
     }
+
+    // function selectPage(pageId) {
+
+    // }
 
     function changeIsPrivate(newValue = true) {
         let newIsPrivate = !!newValue
@@ -110,18 +130,17 @@ export const InfoComp = () => {
                         onClick={() => setOpenModal_editSpace(true)}
                     />
                 </div>}
+            {!!selectedSpace &&
+                <div className={style.actionElement}>
+                <ButtonComp
+                    icon={<PageListIcon/>}
+                    tooltipText={"Show list of pages"}
+                    onClick={() => setOpenModal_pageList(true)}
+                />
+            </div>}
         </div>
 
-        <div className={style.pagePart}>
-            content
-            <ul>
-                <li>isPrivate={isPrivate.toString()}</li>
-                <li>spaceId={spaceId}</li>
-                <li>selectedSpace(title)={!!selectedSpace && selectedSpace['title']}</li>
-                <li>pageId=none</li>
-            </ul>
-
-        </div>
+        <PageComp/>
 
         <CreateSpaceModal
             openModal={openModal_createSpace}
@@ -136,14 +155,21 @@ export const InfoComp = () => {
         />
 
         {!!selectedSpace && <EditSpaceModal
+            key={spaceId}
             openModal={openModal_editSpace}
             closeModal={() => {
                 setOpenModal_editSpace(false)
             }}
             currentSpace={selectedSpace}
-            updateSpaceList={() => {
-                changeIsPrivate(isPrivate)
+            updateSpaceList={init}
+        />}
+        {!!selectedSpace && <PageListModal
+            openModal={openModal_pageList}
+            closeModal={() => {
+                setOpenModal_pageList(false)
             }}
+            currentSpace={selectedSpace}
+            generateHistoryPathByPageId={generateHistoryPathByPageId}
         />}
 
     </div>

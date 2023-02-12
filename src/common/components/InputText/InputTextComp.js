@@ -14,7 +14,7 @@ export const InputTextComp = ({
 
     const onAccept = () => {
         setFocus(false)
-        acceptChanges(text)
+        !!acceptChanges && acceptChanges(text)
     }
 
     useEffect(() => {

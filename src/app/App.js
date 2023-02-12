@@ -89,6 +89,7 @@ const App = () => {
                 {hasRole("PAGE_INFO") && <Route path={"/info"} element={<InfoComp/>}/>}
                 {hasRole("PAGE_INFO") && <Route path={"/info/:visibility"} element={<InfoComp/>}/>}
                 {hasRole("PAGE_INFO") && <Route path={"/info/:visibility/:spaceId"} element={<InfoComp/>}/>}
+                {hasRole("PAGE_INFO") && <Route path={"/info/:visibility/:spaceId/:pageId"} element={<InfoComp/>}/>}
                 {hasRole("PAGE_PHONE") && <Route path={"/phone"} element={<PhoneComp/>}/>}
                 {hasRole("PAGE_FEEDING") && <Route path={"/feeding"} element={<FeedingComp/>}/>}
             </Routes>
