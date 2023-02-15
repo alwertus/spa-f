@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import style from "./Page.module.css";
 import {useParams} from "react-router-dom";
 import {getPage} from "./PageActions";
-import {ButtonComp} from "../../../common/components/Button/ButtonComp";
+import {ButtonComp} from "../../../shared/ui/Button/ButtonComp";
 
 export const PageComp = () => {
     const {spaceId} = useParams()

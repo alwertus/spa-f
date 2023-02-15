@@ -1,4 +1,4 @@
-import {sendMsg} from "../../common/SendMsg";
+import {sendMsg} from "../../shared/api/SendMsg";
 import toast from "react-hot-toast";
 
 export function confirmEmail(string, setStep, setText) {

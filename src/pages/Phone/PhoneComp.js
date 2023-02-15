@@ -2,9 +2,9 @@ import React, {useEffect, useState} from "react";
 import style from "./Phone.module.css";
 import {SmsComp} from "./SmsComp";
 import {getSmsList, sendSms} from "./PhoneActions";
-import {ButtonComp} from "../../common/components/Button/ButtonComp";
-import {ReactComponent as RefreshIcon} from "../../common/img/refresh.svg"
-import {InputTextComp} from "../../common/components/InputText/InputTextComp";
+import {ButtonComp} from "../../shared/ui/Button/ButtonComp";
+import {ReactComponent as RefreshIcon} from "../../shared/ui/img/refresh.svg"
+import {InputTextComp} from "../../shared/ui/InputText/InputTextComp";
 import toast from "react-hot-toast";
 
 export const PhoneComp = () => {

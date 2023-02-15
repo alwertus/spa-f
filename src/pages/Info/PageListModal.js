@@ -1,13 +1,13 @@
 import style from "./Info.module.css";
-import {ModalComp} from "../../common/components/Modal/ModalComp";
+import {ModalComp} from "../../shared/ui/Modal/ModalComp";
 import React, {useEffect, useState} from "react";
 import {changePosition, createPage, deletePage, getPageList} from "./InfoActions";
 import {ListItem} from "./ListItem";
-import {ButtonComp} from "../../common/components/Button/ButtonComp";
-import {InputTextComp} from "../../common/components/InputText/InputTextComp";
-import {ReactComponent as AddIcon} from "../../common/img/plus.svg"
-import {ReactComponent as DeleteIcon} from "../../common/img/delete.svg"
-import {ReactComponent as UpIcon} from "../../common/img/arrow-up.svg"
+import {ButtonComp} from "../../shared/ui/Button/ButtonComp";
+import {InputTextComp} from "../../shared/ui/InputText/InputTextComp";
+import {ReactComponent as AddIcon} from "../../shared/ui/img/plus.svg"
+import {ReactComponent as DeleteIcon} from "../../shared/ui/img/delete.svg"
+import {ReactComponent as UpIcon} from "../../shared/ui/img/arrow-up.svg"
 import toast from "react-hot-toast";
 
 export const PageListModal = ({

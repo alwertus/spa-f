@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import style from "./Feeding.module.css";
-import {InputTextComp} from "../../common/components/InputText/InputTextComp";
-import {ButtonComp} from "../../common/components/Button/ButtonComp";
+import {InputTextComp} from "../../shared/ui/InputText/InputTextComp";
+import {ButtonComp} from "../../shared/ui/Button/ButtonComp";
 import {createAccess, getAccessStatus, setInviteString} from "./FeedingActions";
 import {FeedingDataComp} from "./FeedingDataComp";
-import {str} from "../../common/Language";
+import {str} from "../../shared/const/Language";
 
 export const FeedingComp = ({}) => {
     const [isPageCreated, setIsPageCreated] = useState(false)

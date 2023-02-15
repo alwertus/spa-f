@@ -1,9 +1,9 @@
 import style from "./Info.module.css";
-import {InputTextComp} from "../../common/components/InputText/InputTextComp";
-import {ButtonComp} from "../../common/components/Button/ButtonComp";
+import {InputTextComp} from "../../shared/ui/InputText/InputTextComp";
+import {ButtonComp} from "../../shared/ui/Button/ButtonComp";
 import {createSpace, getSpacesList} from "./InfoActions";
 import toast from "react-hot-toast";
-import {ModalComp} from "../../common/components/Modal/ModalComp";
+import {ModalComp} from "../../shared/ui/Modal/ModalComp";
 import React from "react";
 
 export const CreateSpaceModal = ({

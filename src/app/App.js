@@ -1,7 +1,7 @@
 import style from './App.module.css';
 import {Route, Routes, useNavigate} from 'react-router-dom'
-import {ButtonComp} from "../common/components/Button/ButtonComp";
-import {ReactComponent as AccountIcon} from "../common/img/account.svg"
+import {ButtonComp} from "../shared/ui/Button/ButtonComp";
+import {ReactComponent as AccountIcon} from "../shared/ui/img/account.svg"
 import {LoginComp} from "../pages/Login/LoginComp";
 import {MainComp} from "../pages/Main/MainComp";
 import {Toaster} from "react-hot-toast";
@@ -9,8 +9,8 @@ import {RegisterComp} from "../pages/Login/RegisterComp";
 import {AccountConfirmComp} from "../pages/AccountConfirm/AccountConfirmComp";
 import {useEffect, useState} from "react";
 import {LogoutComp} from "../pages/Login/LogoutComp";
-import {getLocalStorageValue} from "../common/LocalStorage";
-import {AUTH} from "../common/Structures";
+import {getLocalStorageValue} from "../shared/lib/LocalStorage";
+import {AUTH} from "../shared/const/Structures";
 import {getUserInfo} from "./AppActions";
 import {PhoneComp} from "../pages/Phone/PhoneComp";
 import {FeedingComp} from "../pages/Feeding/FeedingComp";

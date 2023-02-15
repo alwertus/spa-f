@@ -1,4 +1,4 @@
-import {sendGetMsg} from "../../../common/SendMsg";
+import {sendGetMsg} from "../../../shared/api/SendMsg";
 
 const URL_PAGE = "info-page"
 

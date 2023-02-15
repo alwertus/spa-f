@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import style from "./Info.module.css";
-import {ButtonComp} from "../../common/components/Button/ButtonComp";
-import {ReactComponent as UpIcon} from "../../common/img/arrow-up.svg"
+import {ButtonComp} from "../../shared/ui/Button/ButtonComp";
+import {ReactComponent as UpIcon} from "../../shared/ui/img/arrow-up.svg"
 import React, {useState} from "react";
 
 export const ListItem = ({itemData, generateHistoryPathByPageId, closeModal, setParentId, parentId}) => {

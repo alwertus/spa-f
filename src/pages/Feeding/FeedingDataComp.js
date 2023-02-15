@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import style from "./FeedingData.module.css";
-import {ButtonComp} from "../../common/components/Button/ButtonComp";
+import {ButtonComp} from "../../shared/ui/Button/ButtonComp";
 import {getData, getInviteString, newTimer, setNewInterval} from "./FeedingActions";
-import {str} from "../../common/Language";
-import {useCountdown} from "../../common/hooks/useCountdown";
-import {ReactComponent as InviteIcon} from "../../common/img/invite.svg";
-import BreastImage from "../../common/img/breast.png";
-import ChestInBraImage from "../../common/img/chest-in-bra.png";
+import {str} from "../../shared/const/Language";
+import {useCountdown} from "../../shared/lib/hooks/useCountdown";
+import {ReactComponent as InviteIcon} from "../../shared/ui/img/invite.svg";
+import BreastImage from "../../shared/ui/img/breast.png";
+import ChestInBraImage from "../../shared/ui/img/chest-in-bra.png";
 
 function getDate(millis) {
     if (!millis) return null

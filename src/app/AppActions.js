@@ -1,6 +1,6 @@
-import {sendMsg} from "../common/SendMsg";
-import {setLocalStorageValue} from "../common/LocalStorage";
-import {AUTH} from "../common/Structures";
+import {sendMsg} from "../shared/api/SendMsg";
+import {setLocalStorageValue} from "../shared/lib/LocalStorage";
+import {AUTH} from "../shared/const/Structures";
 import toast from "react-hot-toast";
 
 export function getUserInfo(token, setIsAuthenticated, setUserData) {

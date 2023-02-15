@@ -1,5 +1,5 @@
 import style from "./Button.module.css";
-import {ELEMENT_POSITION} from "../../Structures";
+import {ELEMENT_POSITION} from "../../const/Structures";
 import { Tooltip } from 'react-tooltip';
 import "react-tooltip/dist/react-tooltip.css";
 import {useId} from "react";

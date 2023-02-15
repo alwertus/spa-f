@@ -1,13 +1,14 @@
 /* !!! All requests must be use this method !!! */
 
-import {getLocalStorageValue, setLocalStorageValue} from "./LocalStorage";
-import {AUTH} from "./Structures";
+import {getLocalStorageValue, setLocalStorageValue} from "../lib/LocalStorage";
+import {AUTH} from "../const/Structures";
+import {SERVER_ADDRESS} from "../const/Backend";
+import {DEBUG} from "../config/Debug";
 
-const DEBUG = true
-const SERVER_PORT = 9000
-// const SERVER_ADDRESS = (window.location.port > 0 ? window.location.origin.replace((":" + window.location.port), "") : window.location.origin) + ":" + SERVER_PORT
-const SERVER_ADDRESS = "http://alwertus.zapto.org/spab"
+
+
 const MSG_DESCRIPTION = "description"
+
 
 function addParamsToUrl(url, params) {
     const u = new URL(url)
@@ -107,3 +108,12 @@ export function sendMsg(method,
         errorHandler("<< ERROR" + e)
     });
 }
+
+export function sendGetMsg(destination, bodyObj, successHandler, errorHandler, isResending, useRefreshToken) {
+    sendMsg("GET", destination, bodyObj, successHandler, errorHandler, isResending, useRefreshToken) }
+export function sendPostMsg(destination, bodyObj, successHandler, errorHandler, isResending, useRefreshToken) {
+    sendMsg("POST", destination, bodyObj, successHandler, errorHandler, isResending, useRefreshToken) }
+export function sendPutMsg(destination, bodyObj, successHandler, errorHandler, isResending, useRefreshToken) {
+    sendMsg("PUT", destination, bodyObj, successHandler, errorHandler, isResending, useRefreshToken) }
+export function sendDeleteMsg(destination, bodyObj, successHandler, errorHandler, isResending, useRefreshToken) {
+    sendMsg("DELETE", destination, bodyObj, successHandler, errorHandler, isResending, useRefreshToken) }

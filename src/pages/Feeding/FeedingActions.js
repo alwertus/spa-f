@@ -1,4 +1,4 @@
-import {sendMsg} from "../../common/SendMsg";
+import {sendMsg} from "../../shared/api/SendMsg";
 
 export function getAccessStatus(setIsPageCreated) {
     sendMsg("POST", "api/feeding/getAccessStatus",{},

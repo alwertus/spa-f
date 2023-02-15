@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import style from "./Info.module.css";
-import {ButtonComp} from "../../common/components/Button/ButtonComp";
-import {ReactComponent as LockOpenIcon} from "../../common/img/lock-open.svg"
-import {ReactComponent as LockCloseIcon} from "../../common/img/lock-close.svg"
-import {ReactComponent as OptionsIcon} from "../../common/img/options.svg"
-import {ReactComponent as AddIcon} from "../../common/img/plus.svg"
-import {ReactComponent as PageListIcon} from "../../common/img/list-ul.svg"
+import {ButtonComp} from "../../shared/ui/Button/ButtonComp";
+import {ReactComponent as LockOpenIcon} from "../../shared/ui/img/lock-open.svg"
+import {ReactComponent as LockCloseIcon} from "../../shared/ui/img/lock-close.svg"
+import {ReactComponent as OptionsIcon} from "../../shared/ui/img/options.svg"
+import {ReactComponent as AddIcon} from "../../shared/ui/img/plus.svg"
+import {ReactComponent as PageListIcon} from "../../shared/ui/img/list-ul.svg"
 import {useNavigate, useParams} from "react-router-dom";
-import {SelectComp} from "../../common/components/Select/SelectComp";
+import {SelectComp} from "../../shared/ui/Select/SelectComp";
 import {getSpacesList} from "./InfoActions";
 import toast from "react-hot-toast";
 import {CreateSpaceModal} from "./CreateSpaceModal";

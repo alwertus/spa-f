@@ -1,7 +1,7 @@
 import style from './Login.module.css';
-import {ButtonComp} from "../../common/components/Button/ButtonComp";
-import {setLocalStorageValue} from "../../common/LocalStorage";
-import {AUTH} from "../../common/Structures";
+import {ButtonComp} from "../../shared/ui/Button/ButtonComp";
+import {setLocalStorageValue} from "../../shared/lib/LocalStorage";
+import {AUTH} from "../../shared/const/Structures";
 
 export const LogoutComp = ({  setIsAuthenticated,
                                setUserData}) => {

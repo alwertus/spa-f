@@ -1,5 +1,5 @@
 import style from "./Sms.module.css";
-import {ButtonComp} from "../../common/components/Button/ButtonComp";
+import {ButtonComp} from "../../shared/ui/Button/ButtonComp";
 import toast from "react-hot-toast";
 import {deleteSms, markSmsAsRead} from "./PhoneActions";
 

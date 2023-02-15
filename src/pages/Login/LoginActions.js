@@ -1,7 +1,7 @@
-import {sendMsg} from "../../common/SendMsg";
+import {sendMsg} from "../../shared/api/SendMsg";
 import toast from "react-hot-toast";
-import {setLocalStorageValue} from "../../common/LocalStorage";
-import {AUTH} from "../../common/Structures";
+import {setLocalStorageValue} from "../../shared/lib/LocalStorage";
+import {AUTH} from "../../shared/const/Structures";
 
 function emptyCheck(variable, errorMessage) {
     if (variable === null || variable.trim().length === 0) {

@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import {sendDeleteMsg, sendGetMsg, sendPostMsg, sendPutMsg} from "../../common/SendMsg";
+import {sendDeleteMsg, sendGetMsg, sendPostMsg, sendPutMsg} from "../../shared/api/SendMsg";
 
 const URL_SPACE = "info-space"
 const URL_PAGE = "info-page"
