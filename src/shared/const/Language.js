@@ -43,7 +43,7 @@ const structure = {
                                                 "ru":"Аккаунт успешно создан. Проверьте свою почту для подтверждения"},
         "Bad credentials":{                     "en":"Incorrect username or password",
                                                 "ru":"Неверные логин или пароль"},
-//  Page INFO
+//  InfoPage INFO
         "Space":{                               "ru":"Пространство"},
         "New Space":{                           "ru":"Новое Пространство"},
         "Title":{                               "ru":"Заголовок"},
@@ -63,7 +63,7 @@ const structure = {
         "Hide menu":{                           "ru":"Скрыть меню"},
         "Show menu":{                           "ru":"Показать меню"},
 
-//  Page Timing
+//  InfoPage Timing
         "Timing":{                              "ru":"Тайминг"},
 
 // Rich editor

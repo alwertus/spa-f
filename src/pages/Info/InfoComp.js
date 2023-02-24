@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 import {CreateSpaceModal} from "./CreateSpaceModal";
 import {EditSpaceModal} from "./EditSpaceModal";
 import {PageListModal} from "./PageListModal";
-import {PageComp} from "./Page/PageComp";
+import {InfoPage} from "../../widgets/InfoPage";
 
 const PRIVATE = "private"
 const PUBLIC = "public"
@@ -22,7 +22,6 @@ export const InfoComp = () => {
     // common attrs
     const {visibility} = useParams()
     const {spaceId} = useParams()
-    // const {pageId} = useParams()
     const history = useNavigate()
     const [isPrivate, setIsPrivate] = useState(visibility === PRIVATE)
     const [spaceList, setSpaceList] = useState([])
@@ -49,16 +48,7 @@ export const InfoComp = () => {
         console.log("Select space=", space)
         setSelectedSpace(space)
         history(generateHistoryPathByPageId(null, space))
-        /*if (!!space) {
-            history("/info/" + (isPrivate ? PRIVATE : PUBLIC) + "/" + space['id'])
-        } else {
-            history("/info/" + (isPrivate ? PRIVATE : PUBLIC))
-        }*/
     }
-
-    // function selectPage(pageId) {
-
-    // }
 
     function changeIsPrivate(newValue = true) {
         let newIsPrivate = !!newValue
@@ -140,7 +130,7 @@ export const InfoComp = () => {
             </div>}
         </div>
 
-        <PageComp/>
+        <InfoPage/>
 
         <CreateSpaceModal
             openModal={openModal_createSpace}

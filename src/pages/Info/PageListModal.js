@@ -54,7 +54,7 @@ export const PageListModal = ({
                         tooltipText={"Create page"}
                         onClick={() => {
                             createPage(currentSpace.id, newPageName, parentId, () => {
-                                updatePageList(() => toast.success("Page '" + newPageName + "' created"))
+                                updatePageList(() => toast.success("InfoPage '" + newPageName + "' created"))
                                 setNewPageName("")
                             })
                         }}
