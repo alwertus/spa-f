@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import style from "./styles.module.css";
 import {useParams} from "react-router-dom";
-import {getPage} from "../api/actions";
+import {getPage, savePage} from "../api/actions";
 import {ButtonComp} from "../../../shared/ui/Button/ButtonComp";
 import {WysiwygEditor} from "../../../features/WysiwygEditor";
 
@@ -15,7 +15,7 @@ export const InfoPage = () => {
     useEffect(() => {
         if (!!pageId) {
             console.log("LOAD PAGE #" + pageId)
-            getPage(spaceId, pageId, setPage)
+            getPage(spaceId, pageId, (e) => {setPage(e); setPageText(e['html'])})
         }
     },[pageId])
 
@@ -31,7 +31,7 @@ export const InfoPage = () => {
             />
             <ButtonComp
                 text={"Save"}
-                onClick={() => {setIsEditMode(!isEditMode)}}
+                onClick={() => {savePage(spaceId, pageId, pageText)}}
             />
         </div>
 

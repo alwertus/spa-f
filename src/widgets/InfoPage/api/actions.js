@@ -16,7 +16,8 @@ export function savePage(spaceId, pageId, text) {
         URL_PAGE,
         {
             "spaceId": spaceId,
-            "pageId": pageId
+            "id": pageId,
+            "html": text
         }
     )
 }

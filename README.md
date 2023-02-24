@@ -1,5 +1,9 @@
 # Single Place Assistant (front)
 
+TODO:
+* show loading progress
+
+
 libs:
 
 Toast
