@@ -13,12 +13,12 @@ Icon repository
 https://www.svgrepo.com/vectors/lock/
 
 Architecture = FEATURE SLICED DESIGN
-https://www.youtube.com/watch?v=c3JGBdxfYcU&t=4s
-https://github.com/feature-sliced/documentation
+* https://www.youtube.com/watch?v=c3JGBdxfYcU&t=4s
+* https://github.com/feature-sliced/documentation
 
 Слой *состоит из* Слайс(модуль) *состоит из* Сегмент
 
-Слой:
+### Слои:
 * app = инициализатор всего приложения
   * провайдеры
   * роутер
@@ -55,7 +55,7 @@ https://github.com/feature-sliced/documentation
   * contract
 * shared = переиспользуемые модули, без привязки к бизнес логике
 
-Внутри каждого слайса есть сегменты:
+### Внутри каждого слайса есть сегменты:
 * index.tx - доступные функции для внешнего использования
 * UI - компоненты
 * model - бизнес логика (state, selector, action)
