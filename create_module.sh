@@ -70,6 +70,7 @@ export default %sLogic;
 
 # api directory
 printf "import {URL} from '../const/attr';
+import {sendGetMsg} from '../../src/shared/api/SendMsg';
 
 export function getData(setDataHandler) {
     sendGetMsg(URL,
