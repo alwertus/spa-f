@@ -9,6 +9,7 @@
     justify-content: center;
     align-items: center;
     animation: showAnim 0.5s forwards;
+    z-index: 10;
 }
 .container {
     box-shadow: #b4c1cd9e 2px 3px 7px 1px;

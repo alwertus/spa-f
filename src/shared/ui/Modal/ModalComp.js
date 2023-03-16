@@ -5,6 +5,7 @@ import style from "./Modal.module.css";
 export const ModalComp = ({   isOpen,
                               onClickOutsideHandler = () => {},
                               content,
+                              containerStyle
 }) => {
     const OUTSIDE_ID = "outside"
 
@@ -17,6 +18,6 @@ export const ModalComp = ({   isOpen,
                          id={OUTSIDE_ID}
                          onClick={onClickOutside}
     >
-        <div className={style.container}>{content}</div>
+        <div className={style.container + (!!containerStyle ? " " + containerStyle : "")}>{content}</div>
     </div> : <div/>
 }

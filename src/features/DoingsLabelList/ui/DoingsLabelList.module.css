@@ -1,0 +1,24 @@
+.wrapper {
+    padding: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.title {
+    margin-bottom: 10px;
+}
+.list {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+    flex: 1;
+}
+.modalButtons {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    justify-content: flex-end;
+}
+.modalStyle {
+    height: 70%;
+}

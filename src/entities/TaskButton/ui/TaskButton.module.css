@@ -1,0 +1,58 @@
+.wrapper {
+    border: 2px solid #0091f81a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8em;
+    height: 4em;
+    margin: 10px;
+    border-radius: 6px;
+    font-size: large;
+    cursor: pointer;
+    user-select: none;
+}
+.wrapper:hover {
+    box-shadow: inset 0 0 10px #0091f861;
+}
+
+.active {
+    animation: snake-border 3s infinite;
+}
+
+@keyframes snake-border {
+    0% {
+        border-top-color: blue;
+        border-right-color: orange;
+        border-bottom-color: blue;
+        border-left-color: orange;
+        font-weight: normal;
+    }
+    25% {
+        border-top-color: orange;
+        border-right-color: blue;
+        border-bottom-color: orange;
+        border-left-color: blue;
+        font-weight: bold;
+    }
+    50% {
+        border-top-color: blue;
+        border-right-color: orange;
+        border-bottom-color: blue;
+        border-left-color: orange;
+        font-weight: normal;
+    }
+    75% {
+        border-top-color: orange;
+        border-right-color: blue;
+        border-bottom-color: orange;
+        border-left-color: blue;
+        font-weight: bold;
+    }
+    100% {
+        border-top-color: blue;
+        border-right-color: orange;
+        border-bottom-color: blue;
+        border-left-color: orange;
+        font-weight: normal;
+    }
+}

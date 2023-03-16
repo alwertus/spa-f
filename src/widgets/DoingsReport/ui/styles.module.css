@@ -1,0 +1,9 @@
+.wrapper {
+}
+.line {
+    display: flex;
+    align-items: center;
+}
+.lineElement {
+    margin-right: 5px;
+}

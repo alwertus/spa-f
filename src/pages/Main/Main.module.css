@@ -1,3 +1,7 @@
 .wrapper {
 
 }
+.kp:hover {
+    fill: blue;
+    pointer-events: bounding-box;
+}

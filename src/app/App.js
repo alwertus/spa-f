@@ -15,6 +15,7 @@ import {getUserInfo} from "./AppActions";
 import {PhoneComp} from "../pages/Phone/PhoneComp";
 import {FeedingComp} from "../pages/Feeding/FeedingComp";
 import {InfoComp} from "../pages/Info/InfoComp";
+import {PageDoings} from "../pages/Doings";
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -59,6 +60,11 @@ const App = () => {
                     text={"Phone"}
                     onClick={() => history("/phone")}
                 />}
+                {hasRole("PAGE_DOINGS") && <ButtonComp
+                    tooltipText={"Time fixation"}
+                    text={"Doings"}
+                    onClick={() => history("/doings")}
+                />}
             </div>
 
             <ButtonComp
@@ -92,6 +98,7 @@ const App = () => {
                 {hasRole("PAGE_INFO") && <Route path={"/info/:visibility/:spaceId/:pageId"} element={<InfoComp/>}/>}
                 {hasRole("PAGE_PHONE") && <Route path={"/phone"} element={<PhoneComp/>}/>}
                 {hasRole("PAGE_FEEDING") && <Route path={"/feeding"} element={<FeedingComp/>}/>}
+                {hasRole("PAGE_DOINGS") && <Route path={"/doings"} element={<PageDoings/>}/>}
             </Routes>
         </div>
     </div>

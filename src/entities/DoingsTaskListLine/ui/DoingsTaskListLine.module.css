@@ -1,0 +1,42 @@
+.wrapper {
+    display: flex;
+    padding: 2px;
+    border-bottom: 1px solid #f5f5f5;
+}
+.simpleWrapper {
+    display: flex;
+    padding: 2px;
+    border-bottom: 1px solid #f5f5f5;
+}
+.wrapper:hover {
+    background-color: #00000017;
+}
+.buttons {
+    display: none;
+}
+.wrapper:hover .buttons {
+    display: flex;
+}
+.wrapper:hover .label {
+    background-color: white;
+}
+.labels {
+    display: flex;
+    flex: 1;
+}
+.label {
+    border: 1px solid #0000ff14;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+    margin: 5px 2px;
+}
+.modal {
+    padding: 10px;
+}
+.modalButtons {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+}

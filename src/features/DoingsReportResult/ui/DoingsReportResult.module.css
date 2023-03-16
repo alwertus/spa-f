@@ -1,0 +1,6 @@
+.wrapper {
+    border: 1px solid grey;
+}
+.line {
+    display: flex;
+}

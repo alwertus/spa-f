@@ -5,10 +5,7 @@ import {AUTH} from "../const/Structures";
 import {SERVER_ADDRESS} from "../const/Backend";
 import {DEBUG} from "../config/Debug";
 
-
-
 const MSG_DESCRIPTION = "description"
-
 
 function addParamsToUrl(url, params) {
     const u = new URL(url)
@@ -17,7 +14,6 @@ function addParamsToUrl(url, params) {
     }
     return u.href
 }
-
 
 export function sendMsg(method,
                         destination,

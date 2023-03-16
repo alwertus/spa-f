@@ -31,7 +31,7 @@ echo "export * from './ui/$component'" >> "$targetPath/index.js"
 
 # ui directory
 printf "import React from 'react';
-import style from './styles.module.css';
+import style from './%s.module.css';
 import %sLogic from '../model/logic';
 
 export const %s = () => {
@@ -41,12 +41,12 @@ export const %s = () => {
         %s
     </div>
 }
-" "$component" "$component" "$component" "$component" >> "$targetPath/ui/$component.js"
+" "$component" "$component" "$component" "$component" "$component" >> "$targetPath/ui/$component.js"
 
 printf ".wrapper {
     border: 1px solid grey;
 }
-" >> "$targetPath/ui/styles.module.css"
+" >> "$targetPath/ui/$component.module.css"
 
 # const directory
 printf "export const URL = 'CHANGE_ME'" >> "$targetPath/const/attr.js"
