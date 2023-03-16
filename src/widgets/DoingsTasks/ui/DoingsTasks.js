@@ -6,12 +6,14 @@ import {TaskData} from "../model/TaskData";
 import {elementComparatorByName} from "../../../shared/lib/Comparator";
 import {LabelsData} from "../model/LabelsData";
 import {DoingsLabelList} from "../../../features/DoingsLabelList";
+import {ButtonComp} from "../../../shared/ui/Button/ButtonComp";
 
-export const DoingsTasks = () => {
+export const DoingsTasks = ({changeShowReport}) => {
     const {tasks, taskActions} = TaskData()
     const {labels, labelActions} = LabelsData()
 
     const [showModalLabels, setShowModalLabels] = useState(false)
+    const [showTaskList, setShowTaskList] = useState(false)
     const [currentTask, setCurrentTask] = useState({})
 
     function openLabelDialogue(task) {
@@ -20,13 +22,32 @@ export const DoingsTasks = () => {
     }
 
     return <div className={style.wrapper}>
-        <div className={style.activeTasks}>
-            {!!tasks && tasks
-                .filter(e => e['checked'] === true)
-                .sort(elementComparatorByName)
-                .map(e => <TaskButton key={e['id']} element={e} taskActions={taskActions} />)}
+
+        <div className={style.line}>
+            <div>
+                <ButtonComp
+                    text={"taskList"}
+                    onClick={() => {setShowTaskList(!showTaskList)}}
+                />
+                <ButtonComp
+                    text={"report"}
+                    onClick={changeShowReport}
+                />
+            </div>
+
+
+            <div className={style.activeTasks}>
+                {!!tasks && tasks
+                    .filter(e => e['checked'] === true)
+                    .sort(elementComparatorByName)
+                    .map(e => <TaskButton key={e['id']} element={e} taskActions={taskActions} />)}
+            </div>
+
         </div>
-        <DoingsTaskList tasks={tasks} taskActions={taskActions} openLabelDialogue={openLabelDialogue}/>
+
+        <div className={style.taskList}>
+            {showTaskList && <DoingsTaskList tasks={tasks} taskActions={taskActions} openLabelDialogue={openLabelDialogue}/>}
+        </div>
 
         <DoingsLabelList
             showModalLabels={showModalLabels}
