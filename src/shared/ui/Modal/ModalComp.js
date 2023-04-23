@@ -19,5 +19,5 @@ export const ModalComp = ({   isOpen,
                          onClick={onClickOutside}
     >
         <div className={style.container + (!!containerStyle ? " " + containerStyle : "")}>{content}</div>
-    </div> : <div/>
+    </div> : <div className={style.hidden}/>
 }

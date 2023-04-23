@@ -67,13 +67,17 @@ export function sendMsg(method,
     // handler if answer is json
     const answerIsJson = (rs) => {
         if (DEBUG) console.log("<< Response JSON (" + rsStatus + ")", rs)
-        statusActions.get(rsStatus)(rs)
+        try {
+            statusActions.get(rsStatus)(rs)
+        } catch (err) {
+            console.error("Error while execute Response Handler for status: " + rsStatus, err)
+        }
     }
 
     // handler if answer is text
     const answerIsText = (text) => {
         if (DEBUG) {
-            if (rsStatus === 200) console.log("<< Response (" + rsStatus + ")", text)
+            if (rsStatus === 200) console.log("<< Response TEXT (" + rsStatus + ")", text)
             else console.error("<< Response TEXT (" + rsStatus + ")", text)
         }
 
@@ -98,6 +102,7 @@ export function sendMsg(method,
                 const data = JSON.parse(response)
                 answerIsJson(data)
             } catch (err) {
+                console.error("Error while parse JSON: ", err)
                 answerIsText(response)
             }
         }).catch( e => {
@@ -112,4 +117,5 @@ export function sendPostMsg(destination, bodyObj, successHandler, errorHandler, 
 export function sendPutMsg(destination, bodyObj, successHandler, errorHandler, isResending, useRefreshToken) {
     sendMsg("PUT", destination, bodyObj, successHandler, errorHandler, isResending, useRefreshToken) }
 export function sendDeleteMsg(destination, bodyObj, successHandler, errorHandler, isResending, useRefreshToken) {
+    // TODO: fix log exception if return message is null
     sendMsg("DELETE", destination, bodyObj, successHandler, errorHandler, isResending, useRefreshToken) }

@@ -1,0 +1,48 @@
+.wrapper {
+    margin-top: 10px;
+    box-shadow: #b4c1cd9e 0 0 6px 2px;
+    border-radius: 6px;
+    padding-bottom: 5px;
+}
+.wrapper:hover {
+    box-shadow: rgba(153, 255, 112, 0.43) 0 0 6px 2px;
+}
+.headLine {
+    font-weight: bold;
+    background-color: #fffff4;
+    border-radius: 6px 6px 0 0;
+    padding: 4px;
+}
+.spaceBetween {
+    justify-content: space-between;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-height: 2em;
+}
+.defaultHidden {
+    display: none;
+}
+.wrapper:hover .defaultHidden {
+    display: flex;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+}
+.modal {
+    padding: 10px;
+}
+.startSpace {
+    margin-left: 20px;
+}
+.modalButtons {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+.element {
+    margin: 0 4px;
+}

@@ -16,11 +16,23 @@ import {PhoneComp} from "../pages/Phone/PhoneComp";
 import {FeedingComp} from "../pages/Feeding/FeedingComp";
 import {InfoComp} from "../pages/Info/InfoComp";
 import {PageDoings} from "../pages/Doings";
+import {Cash} from "../pages/Cash";
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [userData, setUserData] = useState({})
     const history = useNavigate()
+    const [paths, setPaths] = useState({cash: ""})
+
+    const savePath = (key) => {
+        return (value) => setPaths((prev) => ({...prev, [key]: value}))
+    }
+    const getPath = (page) => {
+        if (!paths[page])
+            return "/" + page
+
+        return "/" + page + "/" + paths[page]
+    }
 
     const loginCheck = () => {
         if (!isAuthenticated) {
@@ -36,6 +48,8 @@ const App = () => {
     function hasRole(role) {
         return !!userData['roles'] && userData['roles'].includes(role)
     }
+
+    const pageCash = () => <Cash savePath={savePath("cash")}/>
 
     return <div className={style.wrapper}>
         <div><Toaster/></div>
@@ -64,6 +78,11 @@ const App = () => {
                     tooltipText={"Time fixation"}
                     text={"Doings"}
                     onClick={() => history("/doings")}
+                />}
+                {hasRole("PAGE_CASH") && <ButtonComp
+                    tooltipText={"Cash control"}
+                    text={"Cash"}
+                    onClick={() => history(getPath("cash"))}
                 />}
             </div>
 
@@ -99,6 +118,8 @@ const App = () => {
                 {hasRole("PAGE_PHONE") && <Route path={"/phone"} element={<PhoneComp/>}/>}
                 {hasRole("PAGE_FEEDING") && <Route path={"/feeding"} element={<FeedingComp/>}/>}
                 {hasRole("PAGE_DOINGS") && <Route path={"/doings"} element={<PageDoings/>}/>}
+                {hasRole("PAGE_CASH") && <Route path={"/cash"} element={pageCash()}/>}
+                {hasRole("PAGE_CASH") && <Route path={"/cash/:tab"} element={pageCash()}/>}
             </Routes>
         </div>
     </div>

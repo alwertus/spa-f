@@ -1,0 +1,24 @@
+.wrapper{
+    min-height: 2em;
+    display: flex;
+    user-select: none;
+    flex-direction: column;
+}
+.reverse {
+    flex-direction: row-reverse;
+}
+.element {
+    cursor: pointer;
+    display: flex;
+    color: var(--main-text-color);
+    background-color: var(--bg-color);
+    border: 1px solid #d3d3d3;
+    padding: 2px 4px;
+    transition: color .3s, background-color .3s;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+.active {
+    background-color: #44f11d4d;
+}
