@@ -6,32 +6,58 @@ import {InputTextComp} from "../../../shared/ui/InputText/InputTextComp";
 import {ReactComponent as AddIcon} from "../../../shared/ui/img/plus.svg";
 import toast from "react-hot-toast";
 import {CashWalletCellLine} from "../../CashWalletCellLine";
+import {ReactComponent as DeleteIcon} from "../../../shared/ui/img/delete.svg";
+import {ReactComponent as HideIcon} from "../../../shared/ui/img/eye-closed.svg";
+import {ReactComponent as ShowIcon} from "../../../shared/ui/img/eye.svg";
+import {InvisibleInputText} from "../../../shared/ui/InvisibleInputText";
+import {useIcons} from "../../../shared/lib/hooks/iconsContext";
+import {stringToComponent} from "../../../shared/lib/ComponentConvertor";
+import {DEFAULT_ICON} from "../../../shared/const/defaultIcon";
 
 export const CashWalletLine = ({wallet, actions}) => {
     const [showModalDelete, setShowModalDelete] = useState(false)
+    const [showModalIcons, setShowModalIcons] = useState(false)
+    const [updateCellNameTrigger, setUpdateCellNameTrigger] = useState(false)
     const [cellName, setCellName] = useState("")
-    const [cellIcon, setCellIcon] = useState("")
+    const [cellIcon, setCellIcon] = useState({name:'DEFAULT', svg:DEFAULT_ICON})
+    const icons = useIcons()
 
     function createCell() {
-        actions.cellCreate(wallet.id, cellName, cellIcon, () => {
+        actions.cellCreate(wallet.id, cellName, cellIcon.name, () => {
             toast.success("Wallet-Cell created")
-            // TODO: clear text after add
+
+            // TODO: clear text after add. DO NOT WORK CORRECT!! check code below
+            setUpdateCellNameTrigger(!updateCellNameTrigger)
+            setCellIcon({name:'DEFAULT', svg:DEFAULT_ICON})
         })
     }
 
     return <div className={style.wrapper + " " + style.column}>
         <div className={[style.row, style.spaceBetween, style.headLine].join(" ")}>
-            {`${wallet.name} - ${wallet.currency.name}`}
+
+            {wallet.currency.name}
+            <div className={style.flex1}>
+                <InvisibleInputText
+                    defaultText={wallet.name}
+                    acceptChanges={newValue => {
+                        wallet.name = newValue
+                        actions.update(wallet)
+                    }}
+                />
+            </div>
+
             <div className={style.row + " " + style.defaultHidden}>
                 <ButtonComp
-                    text={wallet.hidden ? "Show" : "Hide"}
+                    tooltipText={wallet.hidden ? "Show" : "Hide"}
+                    icon={wallet.hidden ? <HideIcon/> : <ShowIcon/>}
                     onClick={() => {
                         wallet.hidden = !wallet.hidden
                         actions.update(wallet)
                     }}
                 />
                 <ButtonComp
-                    text={"Del"}
+                    tooltipText={"Delete wallet '" + wallet.name + "'"}
+                    icon={<DeleteIcon/>}
                     onClick={() => {setShowModalDelete(true)}}
                 />
             </div>
@@ -49,13 +75,18 @@ export const CashWalletLine = ({wallet, actions}) => {
                 <div className={style.element}>
                     <InputTextComp
                         title={"Cell name"}
+                        defaultText={""}
                         acceptChanges={text => {setCellName(text)}}
+                        updateTrigger={updateCellNameTrigger}
                     />
                 </div>
                 <div className={style.element}>
-                    <InputTextComp
-                        title={"Icon"}
-                        acceptChanges={text => {setCellIcon(text)}}
+                    <ButtonComp
+                        icon={stringToComponent(cellIcon.svg)}
+                        tooltipText={"Icon"}
+                        onClick={() => {
+                            setShowModalIcons(true)
+                        }}
                     />
                 </div>
             </div>
@@ -84,6 +115,24 @@ export const CashWalletLine = ({wallet, actions}) => {
                         />
                     </div>
                 </div>}
+        />
+        <ModalComp
+            isOpen={showModalIcons}
+            onClickOutsideHandler={() => {setShowModalIcons(false)}}
+            content={
+                <div className={style.modal}>
+                    {!!icons && icons.map(icon => <ButtonComp
+                        key={icon.name}
+                        icon={stringToComponent(icon['svg'])}
+                        tooltipText={icon.name}
+                        onClick={() => {
+                            setCellIcon(icon)
+                            setShowModalIcons(false)
+                        }}
+                    />)
+                    }
+                </div>
+            }
         />
 
     </div>

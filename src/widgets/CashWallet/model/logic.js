@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {createWallet, getCurrencies, getWallets, removeWallet} from '../api/walletRequest';
+import {createWallet, getCurrencies, getWallets, removeWallet, updateWallet} from '../api/walletRequest';
 import toast from "react-hot-toast";
 import {createCell, removeCell, updateCell} from "../api/walletCellRequest";
 
@@ -12,7 +12,7 @@ const WalletLogic = () => {
         getCurrencies(setCurrencyList)
     }, [])
 
-    function updateWallet(updatedWallet) {
+    function updateWalletState(updatedWallet) {
         setWallets(prevWallets => prevWallets.map(wallet => wallet.id === updatedWallet.id ? updatedWallet : wallet))
     }
 
@@ -33,7 +33,7 @@ const WalletLogic = () => {
 
     const walletUpdate = (updatedWallet) => {
         updateWallet(updatedWallet, () => {
-            updateWallet(updatedWallet)
+            updateWalletState(updatedWallet)
         })
     }
 
@@ -47,7 +47,7 @@ const WalletLogic = () => {
                 : [createdCell]
 
             // update wallet
-            updateWallet(updatedWallet)
+            updateWalletState(updatedWallet)
         })
     }
 
@@ -58,7 +58,7 @@ const WalletLogic = () => {
             // update cells within them
             updatedWallet['cells'] = updatedWallet['cells'].map(cell => cell.id === updatedCell.id ? updatedCell : cell)
             // apply changes
-            updateWallet(updatedWallet)
+            updateWalletState(updatedWallet)
         })
     }
 
@@ -69,7 +69,7 @@ const WalletLogic = () => {
             // update cells within them
             updatedWallet['cells'] = updatedWallet['cells'].filter(cell => cell.id !== cellId)
             // apply changes
-            updateWallet(updatedWallet)
+            updateWalletState(updatedWallet)
         })
     }
 

@@ -3,26 +3,35 @@ import style from './CashWalletCellLine.module.css';
 import {ButtonComp} from "../../../shared/ui/Button/ButtonComp";
 import {ModalComp} from "../../../shared/ui/Modal/ModalComp";
 import {InvisibleInputText} from "../../../shared/ui/InvisibleInputText";
+import {useIcons} from "../../../shared/lib/hooks/iconsContext";
+import {DEFAULT_ICON} from "../../../shared/const/defaultIcon";
+import {ReactComponent as DeleteIcon} from "../../../shared/ui/img/delete.svg";
+import {ReactComponent as HideIcon} from "../../../shared/ui/img/eye-closed.svg";
+import {ReactComponent as ShowIcon} from "../../../shared/ui/img/eye.svg";
+import {ReactComponent as NotesEmptyIcon} from "../../../shared/ui/img/notes-empty.svg";
+import {ReactComponent as NotesFilledIcon} from "../../../shared/ui/img/notes-filled.svg";
+import {stringToComponent} from "../../../shared/lib/ComponentConvertor";
 
 export const CashWalletCellLine = ({parentId, cell, actions}) => {
     const [showModalDelete, setShowModalDelete] = useState(false)
     const [showModalNotes, setShowModalNotes] = useState(false)
-    // const [cellName, setCellName] = useState(cell.name)
-    const [updateCellNameTrigger, setUpdateCellNameTrigger] = useState(false)
+    const [showModalIcons, setShowModalIcons] = useState(false)
+    const icons = useIcons()
 
     const updateCellName = newName => {
         cell.name = newName
         actions.cellUpdate(parentId, cell)
     }
 
+    const ico = icons.find(e => e.name === cell.icon) || {name:'DEFAULT', svg:DEFAULT_ICON}
+
     return <div className={style.wrapper}>
         &#x2022;
         <ButtonComp
-            text={cell.icon}
+            icon={stringToComponent(!!ico && ico['svg'])}
             tooltipText={"Icon"}
             onClick={() => {
-                // setCellName(cell.name)
-                setUpdateCellNameTrigger(!updateCellNameTrigger)
+                setShowModalIcons(true)
             }}
         />
         <div className={style.element}>
@@ -30,24 +39,26 @@ export const CashWalletCellLine = ({parentId, cell, actions}) => {
                 tooltipText={"Cell name"}
                 defaultText={cell.name}
                 acceptChanges={updateCellName}
-                updateTrigger={updateCellNameTrigger}
             />
         </div>
         <div className={style.hidden}>
             <ButtonComp
-                text={"N"}
+                icon={!!cell.notes ? <NotesFilledIcon/> : <NotesEmptyIcon/>}
                 tooltipText={"Notes"}
                 onClick={() => {setShowModalNotes(true)}}
             />
             <ButtonComp
-                text={cell.hidden ? "Show" : "Hide"}
+                tooltipText={cell.hidden ? "Show" : "Hide"}
+                icon={cell.hidden ? <HideIcon/> : <ShowIcon/>}
+
                 onClick={() => {
                     cell.hidden = !cell.hidden
                     actions.cellUpdate(parentId, cell)
                 }}
             />
             <ButtonComp
-                text={"Del"}
+                icon={<DeleteIcon/>}
+                tooltipText={"Delete wallet cell '" + cell.name + "'"}
                 onClick={() => {setShowModalDelete(true)}}
             />
         </div>
@@ -70,6 +81,7 @@ export const CashWalletCellLine = ({parentId, cell, actions}) => {
                     </div>
                 </div>}
         />
+
         <ModalComp
             isOpen={showModalNotes}
             onClickOutsideHandler={() => {setShowModalNotes(false)}}
@@ -81,8 +93,30 @@ export const CashWalletCellLine = ({parentId, cell, actions}) => {
                             cell['notes'] = newValue
                             actions.cellUpdate(parentId, cell)
                         }}
+                        discardChanges={() => {setShowModalNotes(false)}}
+                        autoFocus={true}
                     />
                 </div>}
+        />
+
+        <ModalComp
+            isOpen={showModalIcons}
+            onClickOutsideHandler={() => {setShowModalIcons(false)}}
+            content={
+                <div className={style.modal}>
+                    {!!icons && icons.map(icon => <ButtonComp
+                                key={icon.name}
+                                icon={stringToComponent(icon['svg'])}
+                                tooltipText={icon.name}
+                                onClick={() => {
+                                    cell['icon'] = icon.name
+                                    actions.cellUpdate(parentId, cell)
+                                    setShowModalIcons(false)
+                                }}
+                            />)
+                    }
+                </div>
+            }
         />
     </div>
 }

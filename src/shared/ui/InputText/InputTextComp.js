@@ -7,6 +7,7 @@ export const InputTextComp = ({
                                   acceptChanges = () => {},
                                   type = "text",
                                   onKeyPress = () => {},
+                                  updateTrigger,   // each change invokes the `useEffect` logic
 
 }) => {
     const [focus, setFocus] = useState(false)
@@ -19,7 +20,7 @@ export const InputTextComp = ({
 
     useEffect(() => {
         setText(defaultText)
-    },[defaultText])
+    },[defaultText, updateTrigger])
 
     return <div className={style.wrapper}>
         <div className={`${style.placeholder} ${focus || !!text ? style.placeholderRaise : style.placeholderNormal}`}>

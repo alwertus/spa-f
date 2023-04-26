@@ -46,3 +46,7 @@
 .element {
     margin: 0 4px;
 }
+.flex1 {
+    margin: 0 20px;
+    flex: 1;
+}

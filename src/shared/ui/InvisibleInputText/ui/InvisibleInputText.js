@@ -6,7 +6,9 @@ export const InvisibleInputText = ({
                                        tooltipText,
                                        defaultText = "",
                                        acceptChanges,
+                                       discardChanges,
                                        updateTrigger,   // each change invokes the `useEffect` logic
+                                       autoFocus = false,
                                    }) => {
     const id = useId()
     const [text, setText] = useState(defaultText)
@@ -17,12 +19,19 @@ export const InvisibleInputText = ({
         }
     }
 
+    const onDiscard = () => {
+        setText(defaultText)
+        if (!!discardChanges)
+            discardChanges()
+    }
+
     useEffect(() => {
         setText(defaultText)
     },[defaultText, updateTrigger])
 
     return <div id={id} className={style.wrapper}>
         <input
+            autoFocus={autoFocus}
             className={style.input}
             type={"text"}
             value={text}
@@ -33,7 +42,7 @@ export const InvisibleInputText = ({
                     onAccept(text)
                 }
                 if (e.key === 'Escape') {
-                    setText(defaultText)
+                    onDiscard()
                 }
             }}
 
