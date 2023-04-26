@@ -6,7 +6,7 @@
     padding: 4px;
 }
 .wrapper:hover {
-    background-color: #ebffe6;
+    background: linear-gradient(0deg, #00000000 20%, #EBFFE6BA 50%, #00000000 80%);
 }
 .wrapper:hover .hidden {
     display: flex;

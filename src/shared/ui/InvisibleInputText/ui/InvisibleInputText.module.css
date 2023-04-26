@@ -1,0 +1,17 @@
+.wrapper {
+    /*border: 1px solid grey;*/
+    display: flex;
+}
+.input {
+    flex: 1;
+    padding: 0 5px;
+    border: none;
+    background-color: #00000000;
+    min-height: 2em;
+    font-size: 1.1em;
+}
+.input:focus {
+    color: #0a1c74;
+    border-bottom: 1px solid #b9d9a8;
+    outline: none;
+}
