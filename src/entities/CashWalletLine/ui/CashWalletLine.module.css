@@ -35,6 +35,11 @@
 .modal {
     padding: 10px;
 }
+.modalIcons {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
 .startSpace {
     margin-left: 20px;
 }

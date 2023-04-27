@@ -103,7 +103,7 @@ export const CashWalletCellLine = ({parentId, cell, actions}) => {
             isOpen={showModalIcons}
             onClickOutsideHandler={() => {setShowModalIcons(false)}}
             content={
-                <div className={style.modal}>
+                <div className={style.modalIcons}>
                     {!!icons && icons.map(icon => <ButtonComp
                                 key={icon.name}
                                 icon={stringToComponent(icon['svg'])}
