@@ -30,7 +30,7 @@ export const Cash = ({savePath}) => {
     return <div className={style.wrapper}>
         <div className={style.horizontal}>
             <CashMenu/>
-            <CashGraph/>
+            {/*<CashGraph/>*/}
         </div>
         {tabContents[tab]}
     </div>
