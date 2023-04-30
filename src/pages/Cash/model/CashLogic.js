@@ -3,7 +3,7 @@ import {createWallet, getCurrencies, getWallets, removeWallet, updateWallet} fro
 import toast from "react-hot-toast";
 import {createCell, removeCell, updateCell} from "../api/walletCellRequest";
 
-const WalletLogic = () => {
+const CashLogic = () => {
     const [wallets, setWallets] = useState([])
     const [currencyList, setCurrencyList] = useState([])
 
@@ -73,20 +73,28 @@ const WalletLogic = () => {
         })
     }
 
-    const actions = {
+    const Wallet = {
+        list: wallets,
         create: walletCreate,
         remove: walletRemove,
         update: walletUpdate,
-        cellCreate: cellCreate,
-        cellUpdate: cellUpdate,
-        cellRemove: cellRemove,
+    }
+    const Cell = {
+        create: cellCreate,
+        update: cellUpdate,
+        remove: cellRemove,
+    }
+    const Operation = {
+        create: () => {console.log("Create operation")},
+        list: () => {console.log("Get operations")},
     }
 
     return [
         currencyList,
-        wallets,
-        actions,
+        Wallet,
+        Cell,
+        Operation,
     ]
 }
 
-export { WalletLogic };
+export { CashLogic };

@@ -10,6 +10,7 @@ export const CashMain = () => {
         <div style={{width: 700}}>
             <CashMainChart data={UserData}/>
         </div>
+
         {/*{selectedDate && <div>Подробности по дате: {selectedDate}</div>}*/}
     </div>
 }

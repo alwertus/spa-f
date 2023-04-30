@@ -5,11 +5,18 @@ import {CashMenu} from "../../../features/CashMenu";
 import {CashMain} from "../../../widgets/CashMain";
 import {useNavigate, useParams} from "react-router-dom";
 import {CashWallet} from "../../../widgets/CashWallet";
+import {CashLogic} from "../model/CashLogic";
 
 export const Cash = ({savePath}) => {
     const {tab} = useParams()
     const history = useNavigate()
-    const tabContents = {main: <CashMain/>, wallet: <CashWallet/>}
+    const [
+        currencyList,
+        Wallet,
+        Cell,
+        Operation,
+    ] = CashLogic()
+    const tabContents = {main: <CashMain/>, wallet: <CashWallet Wallet={Wallet} Cell={Cell} currencyList={currencyList}/>}
 
     useEffect(() => {
         if (!!tab)

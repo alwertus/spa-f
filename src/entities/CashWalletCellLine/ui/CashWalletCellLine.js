@@ -12,7 +12,7 @@ import {ReactComponent as NotesEmptyIcon} from "../../../shared/ui/img/notes-emp
 import {ReactComponent as NotesFilledIcon} from "../../../shared/ui/img/notes-filled.svg";
 import {stringToComponent} from "../../../shared/lib/ComponentConvertor";
 
-export const CashWalletCellLine = ({parentId, cell, actions}) => {
+export const CashWalletCellLine = ({parentId, cell, Cell}) => {
     const [showModalDelete, setShowModalDelete] = useState(false)
     const [showModalNotes, setShowModalNotes] = useState(false)
     const [showModalIcons, setShowModalIcons] = useState(false)
@@ -20,7 +20,7 @@ export const CashWalletCellLine = ({parentId, cell, actions}) => {
 
     const updateCellName = newName => {
         cell.name = newName
-        actions.cellUpdate(parentId, cell)
+        Cell.update(parentId, cell)
     }
 
     const ico = icons.find(e => e.name === cell.icon) || {name:'DEFAULT', svg:DEFAULT_ICON}
@@ -53,7 +53,7 @@ export const CashWalletCellLine = ({parentId, cell, actions}) => {
 
                 onClick={() => {
                     cell.hidden = !cell.hidden
-                    actions.cellUpdate(parentId, cell)
+                    Cell.update(parentId, cell)
                 }}
             />
             <ButtonComp
@@ -76,7 +76,7 @@ export const CashWalletCellLine = ({parentId, cell, actions}) => {
                         />
                         <ButtonComp
                             text={"Delete"}
-                            onClick={() => {actions.cellRemove(parentId, cell.id)}}
+                            onClick={() => {Cell.remove(parentId, cell.id)}}
                         />
                     </div>
                 </div>}
@@ -91,7 +91,7 @@ export const CashWalletCellLine = ({parentId, cell, actions}) => {
                         defaultText={cell['notes']}
                         acceptChanges={newValue => {
                             cell['notes'] = newValue
-                            actions.cellUpdate(parentId, cell)
+                            Cell.update(parentId, cell)
                         }}
                         discardChanges={() => {setShowModalNotes(false)}}
                         autoFocus={true}
@@ -110,7 +110,7 @@ export const CashWalletCellLine = ({parentId, cell, actions}) => {
                                 tooltipText={icon.name}
                                 onClick={() => {
                                     cell['icon'] = icon.name
-                                    actions.cellUpdate(parentId, cell)
+                                    Cell.update(parentId, cell)
                                     setShowModalIcons(false)
                                 }}
                             />)

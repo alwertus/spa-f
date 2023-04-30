@@ -5,15 +5,9 @@ import {ReactComponent as AddIcon} from "../../../shared/ui/img/plus.svg";
 import {InputTextComp} from "../../../shared/ui/InputText/InputTextComp";
 import {SelectComp} from "../../../shared/ui/Select/SelectComp";
 import {CashWalletLine} from "../../../entities/CashWalletLine";
-import {WalletLogic} from "../model/logic";
+import {CashLogic} from "../../../pages/Cash/model/CashLogic";
 
-export const CashWallet = () => {
-
-    const [
-        currencyList,
-        walletList,
-        walletActions
-    ] = WalletLogic()
+export const CashWallet = ({ Wallet, Cell, currencyList }) => {
 
     const [newWalletName, setNewWalletName] = useState("")
     const [currency, setCurrency] = useState()
@@ -24,7 +18,7 @@ export const CashWallet = () => {
                 icon={<AddIcon/>}
                 tooltipText={"Add Wallet"}
                 onClick={() => {
-                    walletActions.create(newWalletName, currency)
+                    Wallet.create(newWalletName, currency)
                     // setNewWalletName("")
                     // TODO: clear text after add
                 }}
@@ -38,11 +32,12 @@ export const CashWallet = () => {
                 onChange={setCurrency}
             />
         </div>
-        {!!walletList && walletList.map(e =>
+        {!!Wallet.list && Wallet.list.map(e =>
             <CashWalletLine
                 key={e.id}
                 wallet={e}
-                actions={walletActions}
+                Wallet={Wallet}
+                Cell={Cell}
             />
         )}
     </div>

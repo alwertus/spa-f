@@ -14,7 +14,7 @@ import {useIcons} from "../../../shared/lib/hooks/iconsContext";
 import {stringToComponent} from "../../../shared/lib/ComponentConvertor";
 import {DEFAULT_ICON} from "../../../shared/const/defaultIcon";
 
-export const CashWalletLine = ({wallet, actions}) => {
+export const CashWalletLine = ({wallet, Wallet, Cell}) => {
     const [showModalDelete, setShowModalDelete] = useState(false)
     const [showModalIcons, setShowModalIcons] = useState(false)
     const [updateCellNameTrigger, setUpdateCellNameTrigger] = useState(false)
@@ -23,7 +23,7 @@ export const CashWalletLine = ({wallet, actions}) => {
     const icons = useIcons()
 
     function createCell() {
-        actions.cellCreate(wallet.id, cellName, cellIcon.name, () => {
+        Cell.create(wallet.id, cellName, cellIcon.name, () => {
             toast.success("Wallet-Cell created")
 
             // TODO: clear text after add. DO NOT WORK CORRECT!! check code below
@@ -41,7 +41,7 @@ export const CashWalletLine = ({wallet, actions}) => {
                     defaultText={wallet.name}
                     acceptChanges={newValue => {
                         wallet.name = newValue
-                        actions.update(wallet)
+                        Wallet.update(wallet)
                     }}
                 />
             </div>
@@ -52,7 +52,7 @@ export const CashWalletLine = ({wallet, actions}) => {
                     icon={wallet.hidden ? <HideIcon/> : <ShowIcon/>}
                     onClick={() => {
                         wallet.hidden = !wallet.hidden
-                        actions.update(wallet)
+                        Wallet.update(wallet)
                     }}
                 />
                 <ButtonComp
@@ -93,7 +93,7 @@ export const CashWalletLine = ({wallet, actions}) => {
 
             {
                 !!wallet['cells'] && wallet['cells'].map(e => <div key={e.id} className={style.row}>
-                    <CashWalletCellLine cell={e} parentId={wallet.id} actions={actions}/>
+                    <CashWalletCellLine cell={e} parentId={wallet.id} Cell={Cell}/>
                 </div>)
             }
         </div>
@@ -111,7 +111,7 @@ export const CashWalletLine = ({wallet, actions}) => {
                         />
                         <ButtonComp
                             text={"Delete"}
-                            onClick={() => {actions.remove(wallet.id)}}
+                            onClick={() => {Wallet.remove(wallet.id)}}
                         />
                     </div>
                 </div>}
