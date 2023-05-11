@@ -21,11 +21,6 @@
 .modal {
     padding: 10px;
 }
-.modalIcons {
-    padding: 10px;
-    display: flex;
-    flex-wrap: wrap;
-}
 .modalButtons {
     display: flex;
     margin-top: 20px;

@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import style from './Cash.module.css';
-import {CashGraph} from "../../../features/CashGraph";
 import {CashMenu} from "../../../features/CashMenu";
 import {CashMain} from "../../../widgets/CashMain";
 import {useNavigate, useParams} from "react-router-dom";
@@ -16,7 +15,10 @@ export const Cash = ({savePath}) => {
         Cell,
         Operation,
     ] = CashLogic()
-    const tabContents = {main: <CashMain/>, wallet: <CashWallet Wallet={Wallet} Cell={Cell} currencyList={currencyList}/>}
+    const tabContents = {
+        main: <CashMain Wallet={Wallet} Cell={Cell} Operation={Operation}/>,
+        wallet: <CashWallet Wallet={Wallet} Cell={Cell} currencyList={currencyList}/>
+    }
 
     useEffect(() => {
         if (!!tab)

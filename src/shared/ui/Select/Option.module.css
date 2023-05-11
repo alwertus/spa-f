@@ -2,7 +2,12 @@
     border-bottom: 1px solid #bebebe;
     padding: 4px;
     background-color: #fdfdfd;
+    display: flex;
+    align-items: center;
 }
 .wrapper:hover {
     background-color: #d3f3ff;
+}
+.icon {
+    margin-right: 5px;
 }

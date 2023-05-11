@@ -2,18 +2,26 @@ import {useEffect, useState} from 'react';
 import {createWallet, getCurrencies, getWallets, removeWallet, updateWallet} from '../api/walletRequest';
 import toast from "react-hot-toast";
 import {createCell, removeCell, updateCell} from "../api/walletCellRequest";
+import {createOperation, getOperations, removeOperation, updateOperation} from "../api/operationRequest";
 
 const CashLogic = () => {
     const [wallets, setWallets] = useState([])
     const [currencyList, setCurrencyList] = useState([])
+    const [operations, setOperations] = useState([])
 
     useEffect(() => {
         getWallets(setWallets)
         getCurrencies(setCurrencyList)
+        getOperations(setOperations)
     }, [])
 
     function updateWalletState(updatedWallet) {
         setWallets(prevWallets => prevWallets.map(wallet => wallet.id === updatedWallet.id ? updatedWallet : wallet))
+        getOperations(setOperations)
+    }
+
+    function updateOperationState(updatedOperation) {
+        setOperations(prevOperations => prevOperations.map(operation => operation.id === updatedOperation.id ? updatedOperation : operation))
     }
 
     const walletCreate = (name, currency) => {
@@ -73,6 +81,26 @@ const CashLogic = () => {
         })
     }
 
+    const operationCreate = (product, sum, from, to) => {
+        createOperation(from, to, product, sum, null, () => {toast.success("created")})
+    }
+
+    const operationUpdate = (operation) => {
+        updateOperation(operation, (updatedOperation) => {
+            // apply changes
+            updateOperationState(updatedOperation)
+        })
+    }
+    const operationRemove = (operationId) => {
+        removeOperation(operationId, () => {
+            setOperations(prevOperations => prevOperations.filter(operation => operation.id !== operationId))
+        })
+    }
+/*
+    const operationGet = () => {
+
+    }*/
+
     const Wallet = {
         list: wallets,
         create: walletCreate,
@@ -85,8 +113,11 @@ const CashLogic = () => {
         remove: cellRemove,
     }
     const Operation = {
-        create: () => {console.log("Create operation")},
-        list: () => {console.log("Get operations")},
+        list: operations,
+        create: operationCreate,
+        update: operationUpdate,
+        remove: operationRemove,
+        // getByDate: () => {},
     }
 
     return [

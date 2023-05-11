@@ -8,6 +8,7 @@ export const SelectComp = ({
     onChange = (ignored) => {},
     defaultSelectedValue = null,
     ATTRIBUTE_TITLE = 'title',
+    clearSelectValue = false
 }) => {
     const [selected, setSelected] = useState(defaultSelectedValue)
     const [showOptionsList, setShowOptionsList] = useState(false)
@@ -17,7 +18,7 @@ export const SelectComp = ({
     }, [defaultSelectedValue])
 
     function selectItem(element) {
-        setSelected(element.title)
+        setSelected(!!element ? element.title : null)
         setShowOptionsList(false)
         onChange(element)
     }
@@ -41,7 +42,15 @@ export const SelectComp = ({
                 <OptionComp key={e.id}
                             title={e.title}
                             onClick={() => {selectItem(e)}}
+                            icon={e.icon}
                 />)}
+            {clearSelectValue &&
+                <OptionComp key={-1}
+                            title={'NO SELECTED'}
+                            onClick={() => {
+                                selectItem(null)
+                            }}
+                />}
         </div>}
 
     </div>
