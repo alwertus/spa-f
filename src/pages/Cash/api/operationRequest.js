@@ -9,7 +9,7 @@ export function createOperation(walletCellSource, walletCellDestination, product
     if (!!walletCellSource) body.walletCellSource = {id: walletCellSource.id}
     if (!!walletCellDestination) body.walletCellDestination = {id: walletCellDestination.id}
 
-    sendPostMsg(OPERATION_URL, body, successHandler)
+    sendPostMsg(OPERATION_URL, body, successHandler,err => toast.error(err))
 }
 
 export function getOperations(successHandler) {

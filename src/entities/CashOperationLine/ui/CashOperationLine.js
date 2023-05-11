@@ -7,6 +7,7 @@ import {useIcons} from "../../../shared/lib/hooks/iconsContext";
 import {stringToComponent} from "../../../shared/lib/ComponentConvertor";
 import {ReactComponent as DeleteIcon} from "../../../shared/ui/img/delete.svg";
 import {ModalComp} from "../../../shared/ui/Modal/ModalComp";
+// import toast from "react-hot-toast";
 
 export const CashOperationLine = ({item, Operation}) => {
     const icons = useIcons()
@@ -75,6 +76,7 @@ export const CashOperationLine = ({item, Operation}) => {
                             onClick={() => {
                                 Operation.remove(item.id)
                                 setShowModalDelete(false)
+                                // toast.success("Deleted")
                             }}
                         />
                     </div>

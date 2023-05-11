@@ -82,7 +82,10 @@ const CashLogic = () => {
     }
 
     const operationCreate = (product, sum, from, to) => {
-        createOperation(from, to, product, sum, null, () => {toast.success("created")})
+        createOperation(from, to, product, sum, null, newItem => {
+            toast.success("created")
+            setOperations(prevOperations => [...prevOperations, newItem])
+        })
     }
 
     const operationUpdate = (operation) => {
