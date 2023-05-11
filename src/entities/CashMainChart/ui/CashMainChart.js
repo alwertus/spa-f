@@ -1,7 +1,5 @@
 import React, {useRef, useState} from 'react';
-import style from './CashMainChart.module.css';
 import {Line} from "react-chartjs-2";
-import {Chart as ChartJS} from 'chart.js/auto';
 
 export const CashMainChart = ({data, selectDate}) => {
     const chartRef = useRef();
