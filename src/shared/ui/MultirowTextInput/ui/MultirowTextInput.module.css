@@ -1,0 +1,11 @@
+.wrapper {
+    display: flex;
+}
+.textarea {
+    flex: 1;
+    resize: none;
+    border: none;
+    outline: 1px solid #d8d8ff;
+    border-radius: 4px;
+    padding: 3px;
+}

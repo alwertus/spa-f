@@ -23,7 +23,7 @@ export const InputTextComp = ({
     },[defaultText, updateTrigger])
 
     return <div className={style.wrapper}>
-        <div className={`${style.placeholder} ${focus || !!text ? style.placeholderRaise : style.placeholderNormal}`}>
+        <div className={`${style.placeholder} ${focus || !!text || String(text) === '0' ? style.placeholderRaise : style.placeholderNormal}`}>
             {title}
         </div>
         <input className={style.input}
@@ -36,8 +36,12 @@ export const InputTextComp = ({
                        onAccept()
                    }
                }}
-               onChange={(e) => setText(e.target.value)}
-               onKeyPress={onKeyPress}
+               onChange={(e) => {
+                   e.persist();
+                   setText(e.target.value)
+                   onKeyPress(e)
+               }}
+               // onKeyPress={onKeyPress}
         />
     </div>
 }

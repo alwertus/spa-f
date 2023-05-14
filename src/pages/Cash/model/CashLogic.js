@@ -3,8 +3,12 @@ import {createWallet, getCurrencies, getWallets, removeWallet, updateWallet} fro
 import toast from "react-hot-toast";
 import {createCell, removeCell, updateCell} from "../api/walletCellRequest";
 import {createOperation, getOperations, removeOperation, updateOperation} from "../api/operationRequest";
+import {elementComparatorByName} from "../../../shared/lib/Comparator";
+import {stringToComponent} from "../../../shared/lib/ComponentConvertor";
+import {useIcons} from "../../../shared/lib/hooks/iconsContext";
 
 const CashLogic = () => {
+    const icons = useIcons()
     const [wallets, setWallets] = useState([])
     const [currencyList, setCurrencyList] = useState([])
     const [operations, setOperations] = useState([])
@@ -43,6 +47,19 @@ const CashLogic = () => {
         updateWallet(updatedWallet, () => {
             updateWalletState(updatedWallet)
         })
+    }
+
+    const cellList = () => {
+        return wallets
+            .filter(w => !w.hidden)
+            .flatMap(w => w.cells)
+            .filter(cell => !cell.hidden)
+            .sort(elementComparatorByName)
+            .map(cell => {return {
+                id: cell.id,
+                name: cell.name,
+                icon: stringToComponent(icons.find(ico => cell.icon === ico.name)['svg'])
+            }})
     }
 
     const cellCreate = (walletId, name, icon) => {
@@ -89,6 +106,9 @@ const CashLogic = () => {
     }
 
     const operationUpdate = (operation) => {
+        if (!!operation['walletCellSource']) operation['walletCellSource']['icon'] = null
+        if (!!operation['walletCellDestination']) operation['walletCellDestination']['icon'] = null
+        // operation['walletCellDestination']['icon'] = null
         updateOperation(operation, (updatedOperation) => {
             // apply changes
             updateOperationState(updatedOperation)
@@ -111,6 +131,7 @@ const CashLogic = () => {
         update: walletUpdate,
     }
     const Cell = {
+        list: cellList,
         create: cellCreate,
         update: cellUpdate,
         remove: cellRemove,

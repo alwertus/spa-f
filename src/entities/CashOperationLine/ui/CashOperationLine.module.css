@@ -10,6 +10,8 @@
     display: none;
     flex-direction: row;
     flex: 1;
+}
+.alignEnd {
     justify-content: flex-end;
 }
 .modal {
@@ -24,4 +26,11 @@
     display: flex;
     margin-top: 20px;
     justify-content: space-between;
+}
+.group {
+    display: flex;
+}
+.group1 {
+    display: flex;
+    flex: 1;
 }

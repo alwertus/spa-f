@@ -25,6 +25,7 @@ export const ButtonComp = ({
             {text}
         </div>
         {!!tooltipText && <Tooltip
+            style={{zIndex:5}}
             anchorId={id}
             place={"bottom"}
             content={tooltipText}
