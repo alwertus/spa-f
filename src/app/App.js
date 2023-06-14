@@ -17,6 +17,7 @@ import {FeedingComp} from "../pages/Feeding/FeedingComp";
 import {InfoComp} from "../pages/Info/InfoComp";
 import {PageDoings} from "../pages/Doings";
 import {Cash} from "../pages/Cash";
+import {AdminComp} from "../pages/AdminPage/AdminComp";
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -84,6 +85,11 @@ const App = () => {
                     text={"Cash"}
                     onClick={() => history(getPath("cash"))}
                 />}
+                {hasRole("USER") && <ButtonComp
+                    tooltipText={"Admin page"}
+                    text={"Admin page"}
+                    onClick={() => history("/admin")}
+                />}
             </div>
 
             <ButtonComp
@@ -109,6 +115,7 @@ const App = () => {
                             setUserData={setUserData}
                         />}
                 />
+                <Route path={"/admin"} element={<AdminComp/>}/>
                 <Route path={"/register"} element={<RegisterComp/>}/>
                 <Route path={"/emailConfirm/:secret"} element={<AccountConfirmComp/>}/>
                 {hasRole("PAGE_INFO") && <Route path={"/info"} element={<InfoComp/>}/>}
