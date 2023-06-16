@@ -85,7 +85,7 @@ const App = () => {
                     text={"Cash"}
                     onClick={() => history(getPath("cash"))}
                 />}
-                {hasRole("USER") && <ButtonComp
+                {hasRole("ADMIN") && <ButtonComp
                     tooltipText={"User administration"}
                     text={"Admin"}
                     onClick={() => history("/admin")}
@@ -126,7 +126,7 @@ const App = () => {
                 {hasRole("PAGE_DOINGS") && <Route path={"/doings"} element={<PageDoings/>}/>}
                 {hasRole("PAGE_CASH") && <Route path={"/cash"} element={pageCash()}/>}
                 {hasRole("PAGE_CASH") && <Route path={"/cash/:tab"} element={pageCash()}/>}
-                {hasRole("USER") && <Route path={"/admin"} element={AdminComp()}/>}
+                {hasRole("ADMIN") && <Route path={"/admin"} element={<AdminComp/>}/>}
             </Routes>
         </div>
     </div>
