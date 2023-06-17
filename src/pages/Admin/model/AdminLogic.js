@@ -1,51 +1,58 @@
 export const userList = [
     {
-        login: "ydekor",
+        login: "1",
         created: "10.12.23",
         lastLogin: 312321,
-        email: "asd@gmail.com",
+        email: "1@gmail.com",
         roles: ["ADMIN", "USER", "PAGE_INFO"]
     },
     {
-        login: "ydekor",
+        login: "2",
         created: "10.12.23",
         lastLogin: 312321,
-        email: "asd@gmail.com",
+        email: "2@gmail.com",
         roles: ["ADMIN", "USER", "PAGE_INFO"]
     },
     {
-        login: "ydekor",
+        login: "3",
         created: "10.12.23",
         lastLogin: 312321,
-        email: "asd@gmail.com",
+        email: "3@gmail.com",
         roles: ["ADMIN", "USER", "PAGE_INFO"]
     },
     {
-        login: "ydekor",
+        login: "4",
         created: "10.12.23",
         lastLogin: 312321,
-        email: "asd@gmail.com",
+        email: "4@gmail.com",
         roles: ["ADMIN", "USER", "PAGE_INFO"]
     },
     {
-        login: "ydekor",
+        login: "5",
         created: "10.12.23",
         lastLogin: 312321,
-        email: "asd@gmail.com",
+        email: "5@gmail.com",
         roles: ["ADMIN", "USER", "PAGE_INFO"]
     },
     {
-        login: "ydekor",
+        login: "6",
         created: "10.12.23",
         lastLogin: 312321,
-        email: "asd@gmail.com",
+        email: "6@gmail.com",
         roles: ["ADMIN", "USER", "PAGE_INFO"]
     },
     {
-        login: "ydekor",
+        login: "7",
         created: "10.12.23",
         lastLogin: 312321,
-        email: "asd@gmail.com",
+        email: "7@gmail.com",
+        roles: ["ADMIN", "USER", "PAGE_INFO"]
+    },
+    {
+        login: "8",
+        created: "10.12.23",
+        lastLogin: 312321,
+        email: "7@gmail.com",
         roles: ["ADMIN", "USER", "PAGE_INFO"]
     },
 ]

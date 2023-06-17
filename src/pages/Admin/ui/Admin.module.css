@@ -1,3 +1,13 @@
 .wrapper {
-    border: 1px solid black;
+    display: flex;
+    flex: 1;
+}
+.usersLeftSide {
+    /*dsadsa*/
+}
+.userInfoContainer {
+    margin-left: 100px;
+}
+.usersContainer {
+    display: flex;
 }
