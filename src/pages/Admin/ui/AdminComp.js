@@ -1,17 +1,40 @@
 import React, {useEffect, useState} from 'react';
 import style from './Admin.module.css';
-import {userList} from "../model/AdminLogic";
-import {UserItem} from "../../../entities/User";
-import {UserDetails} from "../../../entities/User";
+import {UserItem} from "../../../entities/User/ui/UserItem";
+import {UserDetails} from "../../../entities/User/ui/UserDetails";
+import {sendGetMsg} from "../../../shared/api/SendMsg";
+
+const URL_USER = "admin-user"
 
 export const AdminComp = () => {
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
+    const [roles, setRoles] = useState([]);
 
     useEffect(() => {
-        setUsers(userList)
-        console.log("FFFFFF");
-    }, [])
+        sendGetMsg(
+            URL_USER,
+            {},
+            (response) => {
+                setUsers(response);
+                console.log("user list:", response);
+            },
+            (error) => {
+                console.error("error getting list of users:", error);
+            }
+        );
+        sendGetMsg(
+            URL_USER + "/roles",
+            {},
+            (response) => {
+                setRoles(response);
+                console.log("roles list:", response);
+            },
+            (error) => {
+                console.error("error getting list of roles", error)
+            }
+        );
+    }, []);
 
     const handleUserClick = (user) => {
         setSelectedUser(user);
@@ -38,6 +61,7 @@ export const AdminComp = () => {
                             lastLogin={selectedUser.lastLogin}
                             email={selectedUser.email}
                             roles={selectedUser.roles}
+                            allRoles={roles}
                         />
                     )}
                 </div>

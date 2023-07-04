@@ -6,8 +6,9 @@
     /*dsadsa*/
 }
 .userInfoContainer {
-    margin-left: 100px;
+    flex: 1;
 }
 .usersContainer {
+    flex: 1;
     display: flex;
 }
