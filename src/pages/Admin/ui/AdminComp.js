@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import style from './Admin.module.css';
-import {UserItem} from "../../../entities/User/ui/UserItem";
-import {UserDetails} from "../../../entities/User/ui/UserDetails";
+import {UserItem} from "../../../features/UserItem";
+import {UserDetails} from "../../../entities/User";
 import {sendGetMsg} from "../../../shared/api/SendMsg";
 
 const URL_USER = "admin-user"

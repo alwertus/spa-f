@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import style from "./User.module.css";
+import style from "./UserDetails.module.css";
 import {InputTextComp} from "../../../shared/ui/InputText/InputTextComp";
 import {ButtonComp} from "../../../shared/ui/Button/ButtonComp";
 import {ReactComponent as AddIcon} from "../../../shared/ui/img/plus.svg";
 import {ModalComp} from "../../../shared/ui/Modal/ModalComp";
-import {UserRoles} from "./UserRoles";
+import {UserRoleItem} from "../../../features/UserRoleItem";
 
 export const UserDetails = ({ login, created, lastLogin, email, roles, allRoles}) => {
     const [showRolesWindow, setShowRolesWindow] = useState(false);
@@ -35,7 +35,7 @@ export const UserDetails = ({ login, created, lastLogin, email, roles, allRoles}
             </div>
             <div className={style.roleGroup}>
                 Roles: {roles.map((role) =>
-                <UserRoles key={role} role={role}/>
+                <UserRoleItem key={role} role={role}/>
             )}
                 <div className={style.buttonAddRole}>
                     <ButtonComp
@@ -53,7 +53,7 @@ export const UserDetails = ({ login, created, lastLogin, email, roles, allRoles}
                 <div className={style.modal}>
                     <div>
                         select a role: {allRoles.map((role) => (
-                        <UserRoles key={role} role={role}/>
+                        <UserRoleItem key={role} role={role}/>
                     ))}
                     </div>
                 </div>

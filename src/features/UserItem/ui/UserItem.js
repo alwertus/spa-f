@@ -1,4 +1,4 @@
-import style from "./User.module.css";
+import style from './UserItem.module.css';
 import React from "react";
 
 export const UserItem = ({ login, email, onClick }) => {
@@ -9,4 +9,3 @@ export const UserItem = ({ login, email, onClick }) => {
         </div>
     </div>
 };
-
