@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import style from './Admin.module.css';
-import {UserItem} from "../../../features/UserItem";
-import {UserDetails} from "../../../entities/User";
+import {UserItem} from "../../../entities/UserItem";
+import {UserDetails} from "../../../features/UserDetails";
 import {sendGetMsg} from "../../../shared/api/SendMsg";
 
 const URL_USER = "admin-user"
@@ -17,7 +17,6 @@ export const AdminComp = () => {
             {},
             (response) => {
                 setUsers(response);
-                console.log("user list:", response);
             },
             (error) => {
                 console.error("error getting list of users:", error);
@@ -28,7 +27,6 @@ export const AdminComp = () => {
             {},
             (response) => {
                 setRoles(response);
-                console.log("roles list:", response);
             },
             (error) => {
                 console.error("error getting list of roles", error)

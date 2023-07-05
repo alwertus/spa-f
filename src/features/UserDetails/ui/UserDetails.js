@@ -4,7 +4,7 @@ import {InputTextComp} from "../../../shared/ui/InputText/InputTextComp";
 import {ButtonComp} from "../../../shared/ui/Button/ButtonComp";
 import {ReactComponent as AddIcon} from "../../../shared/ui/img/plus.svg";
 import {ModalComp} from "../../../shared/ui/Modal/ModalComp";
-import {UserRoleItem} from "../../../features/UserRoleItem";
+import {UserRoleItem} from "../../../entities/UserRoleItem";
 
 export const UserDetails = ({ login, created, lastLogin, email, roles, allRoles}) => {
     const [showRolesWindow, setShowRolesWindow] = useState(false);
