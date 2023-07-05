@@ -9,6 +9,11 @@ import {UserRoleItem} from "../../../entities/UserRoleItem";
 export const UserDetails = ({ login, created, lastLogin, email, roles, allRoles}) => {
     const [showRolesWindow, setShowRolesWindow] = useState(false);
 
+    const formatDate = (time) => {
+        const date = new Date(time);
+        return date.toLocaleString();
+    };
+
     return <div className={style.wrapper}>
         <div className={style.userFullInfo}>
             <div className={style.userTextInfo}>
@@ -29,8 +34,8 @@ export const UserDetails = ({ login, created, lastLogin, email, roles, allRoles}
                     </div>
                 </div>
                 <div className={style.userDate}>
-                    <div>Created: {created}</div>
-                    <div>LastLogin: {lastLogin}</div>
+                    <div>Created: {formatDate(created)}</div>
+                    <div>LastLogin: {formatDate(lastLogin)}</div>
                 </div>
             </div>
             <div className={style.roleGroup}>
