@@ -40,7 +40,13 @@ export const UserDetails = ({ login, created, lastLogin, email, roles, allRoles}
             </div>
             <div className={style.roleGroup}>
                 Roles: {roles.map((role) =>
-                <UserRoleItem key={role} role={role}/>
+                <UserRoleItem
+                    key={role}
+                    role={role}
+                    userName={login}
+                    canDelete={true}
+                    closeWindowHandler={() => setShowRolesWindow(false)}
+                />
             )}
                 <div className={style.buttonAddRole}>
                     <ButtonComp
@@ -58,7 +64,10 @@ export const UserDetails = ({ login, created, lastLogin, email, roles, allRoles}
                 <div className={style.modal}>
                     <div>
                         select a role: {allRoles.map((role) => (
-                        <UserRoleItem key={role} role={role}/>
+                        <UserRoleItem
+                            key={role}
+                            role={role}
+                        />
                     ))}
                     </div>
                 </div>

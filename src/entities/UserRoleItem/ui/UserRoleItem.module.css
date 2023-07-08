@@ -1,9 +1,27 @@
 .wrapper {
-    display: flex;
+    position: relative;
 }
 .role {
     border: 1px solid black;
     margin-left: 5px;
     padding: 2px;
     margin-top: 5px;
+}
+.closeButton {
+    margin-bottom: 25px;
+    cursor: pointer;
+    color: red;
+    margin-right: 5px;
+}
+.roleWrapper {
+    display: flex;
+    align-items: center;
+}
+.modal {
+    padding: 10px;
+}
+.modalButtons {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
 }
