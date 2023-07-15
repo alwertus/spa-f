@@ -10,7 +10,7 @@ import {URL_USER} from "../const/const";
 
 export const UserDetails = ({login, created, lastLogin, email, roles, allRoles, /*removeRoleToUser,*/ /*addRoleToUser,*/ setUsers, setSelectedUser}) => {
     const [showRolesWindow, setShowRolesWindow] = useState(false);
-
+    const allAvailableRoles = allRoles.filter((role) => !roles.includes(role));
 
     const formatDate = (time) => {
         const date = new Date(time);
@@ -22,7 +22,6 @@ export const UserDetails = ({login, created, lastLogin, email, roles, allRoles, 
             URL_USER,
             {},
             (response) => {
-                console.log("getting list of Users!!!!!!!1111")
                 setUsers(response);
             },
             (error) => {
@@ -64,7 +63,6 @@ export const UserDetails = ({login, created, lastLogin, email, roles, allRoles, 
                     canDelete={true}
                     closeWindowHandler={() => setShowRolesWindow(false)}
                     setSelectedUser={setSelectedUser}
-                    // removeRoleToUser={removeRoleToUser}
                     setUsers={setUsers}
                     updateUsers={updateUsers}
                 />
@@ -86,14 +84,13 @@ export const UserDetails = ({login, created, lastLogin, email, roles, allRoles, 
             content={
                 <div className={style.modal}>
                     <div>
-                        select a role: {allRoles.map((role) => (
+                        select a role: {allAvailableRoles.map((role) => (
                         <UserRoleItem
                             key={role}
                             role={role}
                             userName={login}
                             canAdd={true}
                             setSelectedUser={setSelectedUser}
-                            // addRoleToUser={setSelectedUser}
                             setUsers={setUsers}
                             updateUsers={updateUsers}
                         />

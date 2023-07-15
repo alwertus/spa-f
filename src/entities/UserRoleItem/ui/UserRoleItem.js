@@ -19,7 +19,6 @@ export const UserRoleItem = ({role, canDelete= false, userName, canAdd= false, c
             requestData,
             (updatedUser) => {
                 updateUsers();
-                console.log("adding role!!!!!")
                 setSelectedUser(updatedUser);
             },
             (error) => {
