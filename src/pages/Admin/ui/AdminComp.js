@@ -10,6 +10,25 @@ export const AdminComp = () => {
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
     const [roles, setRoles] = useState([]);
+    //обновить данные у всех юзеров.
+
+
+
+    // const removeRoleToUser = (userName, newRole) =>{
+    //     console.log("remove Role!!!!!", userName, newRole)
+    //     setSelectedUser((prevState) => ({
+    //         ...prevState,
+    //         roles: prevState.roles.filter((roles) => roles !== newRole),
+    //     }));
+    // }
+
+    // const addRoleToUser = (userName, newRole) =>{
+    //     console.log("add new Role!!!!!", userName, newRole)
+    //     setSelectedUser((prevState) => ({
+    //         ...prevState,
+    //         roles: [...prevState.roles, newRole],
+    //     }));
+    // }
 
     useEffect(() => {
         sendGetMsg(
@@ -60,6 +79,10 @@ export const AdminComp = () => {
                             email={selectedUser.email}
                             roles={selectedUser.roles}
                             allRoles={roles}
+                            setSelectedUser={setSelectedUser}
+                            // addRoleToUser={addRoleToUser}
+                            // removeRoleToUser={removeRoleToUser}
+                            setUsers={setUsers}
                         />
                     )}
                 </div>

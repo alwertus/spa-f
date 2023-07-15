@@ -1,17 +1,28 @@
 .wrapper {
     position: relative;
+    display: flex;
 }
 .role {
     border: 1px solid black;
     margin-left: 5px;
     padding: 2px;
     margin-top: 5px;
+    border-radius: 4px;
+    background-color: #f8ffff;
 }
 .closeButton {
-    margin-bottom: 25px;
+    position: absolute;
+    top: 1px;
+    right: -4px;
     cursor: pointer;
     color: red;
-    margin-right: 5px;
+    width: 10px;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fcefff;
+    font-weight: bold;
 }
 .roleWrapper {
     display: flex;

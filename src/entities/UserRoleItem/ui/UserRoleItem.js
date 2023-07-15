@@ -1,13 +1,32 @@
 import style from './UserRoleItem.module.css';
 import React, {useState} from "react";
 import {ModalComp} from "../../../shared/ui/Modal/ModalComp";
-import {sendDeleteMsg} from "../../../shared/api/SendMsg";
+import {sendDeleteMsg, sendPostMsg} from "../../../shared/api/SendMsg";
 import {ButtonComp} from "../../../shared/ui/Button/ButtonComp";
 
 const URL_USER = "admin-user"
 
-export const UserRoleItem = ({role, canDelete= false, userName, canAdd= false, closeWindowHandler}) => {
+export const UserRoleItem = ({role, canDelete= false, userName, canAdd= false, closeWindowHandler, updateUsers, setSelectedUser}) => {
     const [showModalDelete, setShowModalDelete] = useState(false);
+
+    const handleAddingRole = (role) => {
+        const requestData = {
+            userLogin: userName,
+            roleName: role,
+        };
+        sendPostMsg(
+            URL_USER + "/role",
+            requestData,
+            (updatedUser) => {
+                updateUsers();
+                console.log("adding role!!!!!")
+                setSelectedUser(updatedUser);
+            },
+            (error) => {
+                console.error("error adding role:", error);
+            }
+        )
+    }
 
     const handleRemoveRole = (role) => {
         const requestData = {
@@ -17,17 +36,20 @@ export const UserRoleItem = ({role, canDelete= false, userName, canAdd= false, c
         sendDeleteMsg(
             URL_USER + "/role",
             requestData,
-            {},
+            (updatedUser) => {
+                updateUsers();
+                setSelectedUser(updatedUser);
+            },
             (error) => {
                 console.error("error deleting role:", error);
             }
         )
         setShowModalDelete(false);
         closeWindowHandler();
-    };
+    }
 
     return <div className={style.wrapper}>
-        <div className={style.roleWrapper}>
+        <div className={style.roleWrapper} onClick={() => canAdd && handleAddingRole(role)}>
             <div className={style.role}>{role}</div>
             {canDelete && (
                 <div className={style.closeButton} onClick={() => setShowModalDelete(true)}>

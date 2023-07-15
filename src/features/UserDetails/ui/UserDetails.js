@@ -5,14 +5,31 @@ import {ButtonComp} from "../../../shared/ui/Button/ButtonComp";
 import {ReactComponent as AddIcon} from "../../../shared/ui/img/plus.svg";
 import {ModalComp} from "../../../shared/ui/Modal/ModalComp";
 import {UserRoleItem} from "../../../entities/UserRoleItem";
+import {sendGetMsg} from "../../../shared/api/SendMsg";
+import {URL_USER} from "../const/const";
 
-export const UserDetails = ({ login, created, lastLogin, email, roles, allRoles}) => {
+export const UserDetails = ({login, created, lastLogin, email, roles, allRoles, /*removeRoleToUser,*/ /*addRoleToUser,*/ setUsers, setSelectedUser}) => {
     const [showRolesWindow, setShowRolesWindow] = useState(false);
+
 
     const formatDate = (time) => {
         const date = new Date(time);
         return date.toLocaleString();
     };
+
+    const updateUsers = () => {
+        sendGetMsg(
+            URL_USER,
+            {},
+            (response) => {
+                console.log("getting list of Users!!!!!!!1111")
+                setUsers(response);
+            },
+            (error) => {
+                console.error("error getting list of users:", error);
+            }
+        );
+    }
 
     return <div className={style.wrapper}>
         <div className={style.userFullInfo}>
@@ -46,13 +63,19 @@ export const UserDetails = ({ login, created, lastLogin, email, roles, allRoles}
                     userName={login}
                     canDelete={true}
                     closeWindowHandler={() => setShowRolesWindow(false)}
+                    setSelectedUser={setSelectedUser}
+                    // removeRoleToUser={removeRoleToUser}
+                    setUsers={setUsers}
+                    updateUsers={updateUsers}
                 />
             )}
                 <div className={style.buttonAddRole}>
                     <ButtonComp
                         tooltipText={"Add role"}
                         icon={<AddIcon/>}
-                        onClick={() => {setShowRolesWindow(true)}}
+                        onClick={() => {
+                            setShowRolesWindow(true)
+                        }}
                     />
                 </div>
             </div>
@@ -67,6 +90,12 @@ export const UserDetails = ({ login, created, lastLogin, email, roles, allRoles}
                         <UserRoleItem
                             key={role}
                             role={role}
+                            userName={login}
+                            canAdd={true}
+                            setSelectedUser={setSelectedUser}
+                            // addRoleToUser={setSelectedUser}
+                            setUsers={setUsers}
+                            updateUsers={updateUsers}
                         />
                     ))}
                     </div>
