@@ -3,12 +3,12 @@
     display: flex;
 }
 .role {
-    border: 1px solid black;
+    border: 1px solid #00000042;
     margin-left: 5px;
-    padding: 2px;
+    padding: 3px 5px;
     margin-top: 5px;
     border-radius: 4px;
-    background-color: #f8ffff;
+    background-color: #f3dcf5;
 }
 .closeButton {
     position: absolute;
