@@ -1,12 +1,21 @@
 import style from './UserRoleItem.module.css';
 import React, {useState} from "react";
 import {ModalComp} from "../../../shared/ui/Modal/ModalComp";
-import {sendDeleteMsg, sendPostMsg} from "../../../shared/api/SendMsg";
+import {sendDeleteMsg} from "../../../shared/api/SendMsg";
 import {ButtonComp} from "../../../shared/ui/Button/ButtonComp";
+import {URL_USER} from "../../../features/UserDetails/const/const";
+import {sendData} from "../api/request";
+import toast from "react-hot-toast";
 
-const URL_USER = "admin-user"
-
-export const UserRoleItem = ({role, canDelete= false, userName, canAdd= false, closeWindowHandler, updateUsers, setSelectedUser}) => {
+export const UserRoleItem = ({
+                                 role,
+                                 canDelete= false,
+                                 userName,
+                                 canAdd= false,
+                                 closeWindowHandler,
+                                 updateUsers,
+                                 setSelectedUser
+}) => {
     const [showModalDelete, setShowModalDelete] = useState(false);
 
     const handleAddingRole = (role) => {
@@ -14,17 +23,7 @@ export const UserRoleItem = ({role, canDelete= false, userName, canAdd= false, c
             userLogin: userName,
             roleName: role,
         };
-        sendPostMsg(
-            URL_USER + "/role",
-            requestData,
-            (updatedUser) => {
-                updateUsers();
-                setSelectedUser(updatedUser);
-            },
-            (error) => {
-                console.error("error adding role:", error);
-            }
-        )
+        sendData(requestData, updateUsers, setSelectedUser);
     }
 
     const handleRemoveRole = (role) => {
@@ -38,9 +37,10 @@ export const UserRoleItem = ({role, canDelete= false, userName, canAdd= false, c
             (updatedUser) => {
                 updateUsers();
                 setSelectedUser(updatedUser);
+                toast.success("success")
             },
             (error) => {
-                console.error("error deleting role:", error);
+                toast.error("error deleting role:", error);
             }
         )
         setShowModalDelete(false);

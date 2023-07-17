@@ -2,9 +2,8 @@ import React, {useEffect, useState} from 'react';
 import style from './Admin.module.css';
 import {UserItem} from "../../../entities/UserItem";
 import {UserDetails} from "../../../features/UserDetails";
-import {sendGetMsg} from "../../../shared/api/SendMsg";
-
-const URL_USER = "admin-user"
+import {LoadUsers} from "../api/LoadUsers";
+import {LoadRoles} from "../api/LoadRoles";
 
 export const AdminComp = () => {
     const [users, setUsers] = useState([]);
@@ -12,42 +11,20 @@ export const AdminComp = () => {
     const [roles, setRoles] = useState([]);
 
     useEffect(() => {
-        sendGetMsg(
-            URL_USER,
-            {},
-            (response) => {
-                setUsers(response);
-            },
-            (error) => {
-                console.error("error getting list of users:", error);
-            }
-        );
-        sendGetMsg(
-            URL_USER + "/roles",
-            {},
-            (response) => {
-                setRoles(response);
-            },
-            (error) => {
-                console.error("error getting list of roles", error)
-            }
-        );
+        LoadUsers(setUsers);
+        LoadRoles(setRoles);
     }, []);
-
-    const handleUserClick = (user) => {
-        setSelectedUser(user);
-    };
 
     return (
         <div className={style.wrapper}>
-            <div className={style.usersContainer}>
+            <div className={style.userList}>
                 <div className={style.usersLeftSide}>
                     {users.map((user) => (
                         <UserItem
                             key={user.login}
                             login={user.login}
                             email={user.email}
-                            onClick={() => handleUserClick(user)}
+                            onClick={() => setSelectedUser(user)}
                         />
                     ))}
                 </div>
