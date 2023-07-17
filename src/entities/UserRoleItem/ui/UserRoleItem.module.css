@@ -1,5 +1,4 @@
 .wrapper {
-    position: relative;
     display: flex;
 }
 .role {
@@ -21,10 +20,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #fcefff;
+    background-color: white;
     font-weight: bold;
 }
 .roleWrapper {
+    position: relative;
     display: flex;
     align-items: center;
 }
