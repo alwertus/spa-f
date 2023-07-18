@@ -1,0 +1,31 @@
+.wrapper {
+    display: flex;
+}
+.role {
+    border: 1px solid #00000042;
+    margin-left: 5px;
+    padding: 3px 5px;
+    margin-top: 5px;
+    border-radius: 4px;
+    background-color: #f3dcf5;
+}
+.roleWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.modal {
+    padding: 10px;
+}
+.modalButtons {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+.crossIcon {
+    right: -6px;
+    position: absolute;
+    width: 1em;
+    top: -1px;
+    cursor: pointer;
+}

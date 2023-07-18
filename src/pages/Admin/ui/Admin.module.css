@@ -1,0 +1,11 @@
+.wrapper {
+    display: flex;
+    flex: 1;
+}
+.userInfoContainer {
+    flex: 1;
+}
+.userList {
+    flex: 1;
+    display: flex;
+}

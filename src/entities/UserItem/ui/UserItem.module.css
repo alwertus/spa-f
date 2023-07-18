@@ -1,0 +1,17 @@
+.wrapper {
+    display: flex;
+}
+.userSmallInfo {
+    flex: 1;
+    cursor: pointer;
+    margin: 2px;
+    padding: 5px 4px;
+    border: 1px solid #d3d3d3;
+    border-radius: 4px;
+    color: #3a6565;
+    background-color: #f2ffff;
+}
+.userSmallInfo:hover {
+    background-color: #3a6565;
+    color: white;
+}
