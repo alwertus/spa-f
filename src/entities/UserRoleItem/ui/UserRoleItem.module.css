@@ -9,20 +9,6 @@
     border-radius: 4px;
     background-color: #f3dcf5;
 }
-.closeButton {
-    position: absolute;
-    top: 1px;
-    right: -4px;
-    cursor: pointer;
-    color: red;
-    width: 10px;
-    height: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    font-weight: bold;
-}
 .roleWrapper {
     position: relative;
     display: flex;
@@ -35,4 +21,11 @@
     display: flex;
     margin-top: 20px;
     justify-content: space-between;
+}
+.crossIcon {
+    right: -6px;
+    position: absolute;
+    width: 1em;
+    top: -1px;
+    cursor: pointer;
 }

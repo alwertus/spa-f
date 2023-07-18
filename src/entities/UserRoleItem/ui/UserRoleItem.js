@@ -6,6 +6,7 @@ import {ButtonComp} from "../../../shared/ui/Button/ButtonComp";
 import {URL_USER} from "../../../features/UserDetails/const/const";
 import {sendData} from "../api/request";
 import toast from "react-hot-toast";
+import {ReactComponent as CrossIcon} from "../../../shared/ui/img/Cross.svg";
 
 export const UserRoleItem = ({
                                  role,
@@ -16,6 +17,7 @@ export const UserRoleItem = ({
                                  updateUsers,
                                  setSelectedUser
 }) => {
+
     const [showModalDelete, setShowModalDelete] = useState(false);
 
     const handleAddingRole = (role) => {
@@ -51,8 +53,8 @@ export const UserRoleItem = ({
         <div className={style.roleWrapper} onClick={() => canAdd && handleAddingRole(role)}>
             <div className={style.role}>{role}</div>
             {canDelete && (
-                <div className={style.closeButton} onClick={() => setShowModalDelete(true)}>
-                    x
+                <div className={style.crossIcon} onClick={() => setShowModalDelete(true)}>
+                    <CrossIcon />
                 </div>
             )}
         </div>
