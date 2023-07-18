@@ -1,12 +1,9 @@
 import style from './UserRoleItem.module.css';
 import React, {useState} from "react";
 import {ModalComp} from "../../../shared/ui/Modal/ModalComp";
-import {sendDeleteMsg} from "../../../shared/api/SendMsg";
 import {ButtonComp} from "../../../shared/ui/Button/ButtonComp";
-import {addRole} from "../api/request";
-import toast from "react-hot-toast";
+import {addRole, deleteRole} from "../api/request";
 import {ReactComponent as CrossIcon} from "../../../shared/ui/img/Cross.svg";
-import {URL_ADMIN_USER} from "../../../shared/const/Constans";
 
 export const UserRoleItem = ({
                                  role,
@@ -25,22 +22,7 @@ export const UserRoleItem = ({
     }
 
     const handleRemoveRole = (role) => {
-        const requestData = {
-            userLogin: userName,
-            roleName: role,
-        };
-        sendDeleteMsg(
-            URL_ADMIN_USER + "/role",
-            requestData,
-            (updatedUser) => {
-                updateUsers();
-                setSelectedUser(updatedUser);
-                toast.success("success")
-            },
-            (error) => {
-                toast.error("error deleting role:", error);
-            }
-        )
+        deleteRole(userName, role, updateUsers, setSelectedUser)
         setShowModalDelete(false);
         closeWindowHandler();
     }

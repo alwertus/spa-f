@@ -5,10 +5,18 @@ import {ButtonComp} from "../../../shared/ui/Button/ButtonComp";
 import {ReactComponent as AddIcon} from "../../../shared/ui/img/plus.svg";
 import {ModalComp} from "../../../shared/ui/Modal/ModalComp";
 import {UserRoleItem} from "../../../entities/UserRoleItem";
-import {sendGetMsg} from "../../../shared/api/SendMsg";
-import {URL_ADMIN_USER} from "../../../shared/const/Constans";
+import {GetUsersList} from "../api/GetUsersList";
 
-export const UserDetails = ({login, created, lastLogin, email, roles, allRoles, /*removeRoleToUser,*/ /*addRoleToUser,*/ setUsers, setSelectedUser}) => {
+export const UserDetails = ({
+        login,
+        created,
+        lastLogin,
+        email,
+        roles,
+        allRoles,
+        setUsers,
+        setSelectedUser
+}) => {
     const [showRolesWindow, setShowRolesWindow] = useState(false);
     const allAvailableRoles = allRoles.filter((role) => !roles.includes(role));
 
@@ -18,16 +26,7 @@ export const UserDetails = ({login, created, lastLogin, email, roles, allRoles, 
     };
 
     const updateUsers = () => {
-        sendGetMsg(
-            URL_ADMIN_USER,
-            {},
-            (response) => {
-                setUsers(response);
-            },
-            (error) => {
-                console.error("error getting list of users:", error);
-            }
-        );
+        GetUsersList(setUsers);
     }
 
     return <div className={style.wrapper}>

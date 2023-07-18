@@ -18,7 +18,7 @@ export const AdminComp = () => {
     return (
         <div className={style.wrapper}>
             <div className={style.userList}>
-                <div className={style.usersLeftSide}>
+                <div>
                     {users.map((user) => (
                         <UserItem
                             key={user.login}
