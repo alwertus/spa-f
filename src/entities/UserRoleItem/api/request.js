@@ -15,7 +15,7 @@ export const addRole = (userName, role, updateUsers, setSelectedUser) => {
             toast.success("success");
         },
         (error) => {
-            toast.error("Error adding role: " + " " + error);
+            toast.error("Error adding role: " + error);
         }
     )
 }
@@ -33,7 +33,7 @@ export const deleteRole = (userName, role, updateUsers, setSelectedUser) => {
             toast.success("success")
         },
         (error) => {
-            toast.error("error deleting role:" + " " +  error);
+            toast.error("error deleting role: " + error);
         }
     )
 }
