@@ -10,7 +10,7 @@ export const LoadRoles = (setRoles) => {
             setRoles(response);
         },
         (error) => {
-            toast.error("error getting list of roles", error)
+            toast.error("error getting list of roles" + " " + error)
         }
     );
 }

@@ -10,7 +10,7 @@ export const LoadUsers = (setUsers) => {
             setUsers(response);
         },
         (error) => {
-            toast.error("error getting list of users:", error);
+            toast.error("error getting list of users:" + " " + error);
         }
     );
 }
