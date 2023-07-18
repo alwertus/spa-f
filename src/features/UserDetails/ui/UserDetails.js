@@ -6,7 +6,7 @@ import {ReactComponent as AddIcon} from "../../../shared/ui/img/plus.svg";
 import {ModalComp} from "../../../shared/ui/Modal/ModalComp";
 import {UserRoleItem} from "../../../entities/UserRoleItem";
 import {sendGetMsg} from "../../../shared/api/SendMsg";
-import {URL_USER} from "../const/const";
+import {URL_ADMIN_USER} from "../../../shared/const/Constans";
 
 export const UserDetails = ({login, created, lastLogin, email, roles, allRoles, /*removeRoleToUser,*/ /*addRoleToUser,*/ setUsers, setSelectedUser}) => {
     const [showRolesWindow, setShowRolesWindow] = useState(false);
@@ -19,7 +19,7 @@ export const UserDetails = ({login, created, lastLogin, email, roles, allRoles, 
 
     const updateUsers = () => {
         sendGetMsg(
-            URL_USER,
+            URL_ADMIN_USER,
             {},
             (response) => {
                 setUsers(response);

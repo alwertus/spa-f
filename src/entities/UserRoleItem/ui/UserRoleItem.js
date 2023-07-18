@@ -3,10 +3,10 @@ import React, {useState} from "react";
 import {ModalComp} from "../../../shared/ui/Modal/ModalComp";
 import {sendDeleteMsg} from "../../../shared/api/SendMsg";
 import {ButtonComp} from "../../../shared/ui/Button/ButtonComp";
-import {URL_USER} from "../../../features/UserDetails/const/const";
-import {sendData} from "../api/request";
+import {addRole} from "../api/request";
 import toast from "react-hot-toast";
 import {ReactComponent as CrossIcon} from "../../../shared/ui/img/Cross.svg";
+import {URL_ADMIN_USER} from "../../../shared/const/Constans";
 
 export const UserRoleItem = ({
                                  role,
@@ -21,11 +21,7 @@ export const UserRoleItem = ({
     const [showModalDelete, setShowModalDelete] = useState(false);
 
     const handleAddingRole = (role) => {
-        const requestData = {
-            userLogin: userName,
-            roleName: role,
-        };
-        sendData(requestData, updateUsers, setSelectedUser);
+        addRole(userName, role, updateUsers, setSelectedUser);
     }
 
     const handleRemoveRole = (role) => {
@@ -34,7 +30,7 @@ export const UserRoleItem = ({
             roleName: role,
         };
         sendDeleteMsg(
-            URL_USER + "/role",
+            URL_ADMIN_USER + "/role",
             requestData,
             (updatedUser) => {
                 updateUsers();

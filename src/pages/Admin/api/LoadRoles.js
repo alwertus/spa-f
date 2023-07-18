@@ -1,10 +1,10 @@
 import {sendGetMsg} from "../../../shared/api/SendMsg";
 import toast from "react-hot-toast";
-import {URL_USER} from "../const/const";
+import {URL_ADMIN_USER} from "../../../shared/const/Constans";
 
 export const LoadRoles = (setRoles) => {
     sendGetMsg(
-        URL_USER + "/roles",
+        URL_ADMIN_USER + "/roles",
         {},
         (response) => {
             setRoles(response);

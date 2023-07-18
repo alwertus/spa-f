@@ -1,11 +1,14 @@
 import {sendPostMsg} from "../../../shared/api/SendMsg";
-import {URL_USER} from "../../../features/UserDetails/const/const";
 import toast from "react-hot-toast";
+import {URL_ADMIN_USER} from "../../../shared/const/Constans";
 
-export const sendData = (requestData, updateUsers, setSelectedUser) => {
+export const addRole = (userName, role, updateUsers, setSelectedUser) => {
     sendPostMsg(
-        URL_USER + "/role",
-        requestData,
+        URL_ADMIN_USER + "/role",
+        {
+            userLogin: userName,
+            roleName: role,
+        },
         (updatedUser) => {
             updateUsers();
             setSelectedUser(updatedUser);
