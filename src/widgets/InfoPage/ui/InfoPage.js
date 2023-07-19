@@ -26,15 +26,14 @@ export const InfoPage = () => {
     return <div className={style.wrapper}>
         <div className={style.actions}>
             <ButtonComp
-                text={isEditMode ? "Normal" : "Edit"}
-                onClick={() => {setIsEditMode(!isEditMode)}}
-            />
-            <ButtonComp
                 text={"Save"}
                 onClick={() => {savePage(spaceId, pageId, pageText)}}
             />
+            <ButtonComp
+                text={isEditMode ? "Normal" : "Edit"}
+                onClick={() => {setIsEditMode(!isEditMode)}}
+            />
         </div>
-
         {
             isEditMode
                 ? <WysiwygEditor
