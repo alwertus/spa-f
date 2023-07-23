@@ -1,4 +1,30 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+}
 .editor {
     width: 100%;
     min-height: 20em;
+}
+.area {
+    flex:1;
+}
+.buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    background-color: lightblue;
+}
+.showCode {
+    margin: 0 4px;
+    width: 2em;
+}
+.workSpace {
+    outline: 2px solid #f33030;
+}
+.needToSave {
+    outline: 2px solid #f33030;
+}
+
+.notNeedToSave {
+    outline: 2px solid #76f66d;
 }

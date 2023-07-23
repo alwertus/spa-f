@@ -11,11 +11,12 @@ export const InfoPage = () => {
     const [isEditMode, setIsEditMode] = useState(false)
     const [page, setPage] = useState({})
     const [pageText, setPageText] = useState("")
+    const [isContentSaved, setIsContentSaved] = useState(true)
 
     useEffect(() => {
         if (!!pageId) {
             console.log("LOAD PAGE #" + pageId)
-            getPage(spaceId, pageId, (e) => {setPage(e); setPageText(e['html'])})
+            getPage(spaceId, pageId, (e) => {setPage(e); setPageText(e['html']); setIsContentSaved(true)})
         }
     },[pageId])
 
@@ -23,22 +24,34 @@ export const InfoPage = () => {
         no content
     </div>
 
+    const handleTextChange = (text) => {
+        setPageText(text);
+        setIsContentSaved(false);
+    };
+
     return <div className={style.wrapper}>
         <div className={style.actions}>
-            <ButtonComp
-                text={"Save"}
-                onClick={() => {savePage(spaceId, pageId, pageText)}}
-            />
             <ButtonComp
                 text={isEditMode ? "Normal" : "Edit"}
                 onClick={() => {setIsEditMode(!isEditMode)}}
             />
+            {isEditMode && (
+                <ButtonComp
+                    text={"save"}
+                    onClick={() => {
+                        savePage(spaceId, pageId, pageText);
+                        setIsContentSaved(true);
+                    }}
+                />
+            )}
         </div>
+
         {
             isEditMode
                 ? <WysiwygEditor
                     text={pageText}
-                    setText={setPageText}
+                    setText={handleTextChange}
+                    isSaved={isContentSaved}
                 />
                 : <div className={style.wrapper} dangerouslySetInnerHTML={{__html: pageText}}/>
         }
