@@ -4,10 +4,10 @@ import {ButtonComp} from "../../../shared/ui/Button/ButtonComp";
 import {ReactComponent as ArrowUp} from "../../../shared/ui/img/arrow-up.svg"
 import {ReactComponent as ArrowDown} from "../../../shared/ui/img/arrow-down.svg"
 
-export const WysiwygEditor = ({text, setText, isSaved}) => {
+export const WysiwygEditor = ({text, setText, hasUnsavedChanges}) => {
     const [mode, setMode] = useState("edit")
 
-    return <div className={`${style.wrapper} ${isSaved ? style.notNeedToSave : style.needToSave}`}>
+    return <div className={`${style.wrapper} ${hasUnsavedChanges ? style.needToSave : style.notNeedToSave}`}>
         <div className={style.buttonGroup}>
             <div className={style.showCode}>
                 <ButtonComp

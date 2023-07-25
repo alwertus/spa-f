@@ -5,3 +5,10 @@
     display: flex;
     margin: 5px;
 }
+.needToSave {
+    outline: 2px solid #f33030;
+}
+
+.notNeedToSave {
+    outline: 2px solid #76f66d;
+}

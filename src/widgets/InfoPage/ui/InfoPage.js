@@ -10,24 +10,28 @@ export const InfoPage = () => {
     const {pageId} = useParams()
     const [isEditMode, setIsEditMode] = useState(false)
     const [page, setPage] = useState({})
-    const [pageText, setPageText] = useState("")
-    const [isContentSaved, setIsContentSaved] = useState(true)
+    const [pageText, setPageText] = useState("");
+    const [tmpPageText, setTmpPageText] = useState("");
+
+    const setHtml = (newValue) => {
+        setPageText(newValue)
+        setTmpPageText(newValue)
+    }
 
     useEffect(() => {
         if (!!pageId) {
             console.log("LOAD PAGE #" + pageId)
-            getPage(spaceId, pageId, (e) => {setPage(e); setPageText(e['html']); setIsContentSaved(true)})
+            getPage(spaceId, pageId, (e) => {
+                setPage(e);
+                setPageText(e['html'])
+                setTmpPageText(e['html'])
+            })
         }
     },[pageId])
 
     if (!pageId) return <div>
         no content
     </div>
-
-    const handleTextChange = (text) => {
-        setPageText(text);
-        setIsContentSaved(false);
-    };
 
     return <div className={style.wrapper}>
         <div className={style.actions}>
@@ -39,8 +43,8 @@ export const InfoPage = () => {
                 <ButtonComp
                     text={"save"}
                     onClick={() => {
-                        savePage(spaceId, pageId, pageText);
-                        setIsContentSaved(true);
+                        savePage(spaceId, pageId, pageText, setHtml)
+                        setTmpPageText(pageText)
                     }}
                 />
             )}
@@ -50,10 +54,11 @@ export const InfoPage = () => {
             isEditMode
                 ? <WysiwygEditor
                     text={pageText}
-                    setText={handleTextChange}
-                    isSaved={isContentSaved}
+                    setText={setPageText}
+                    hasUnsavedChanges={pageText !== tmpPageText}
                 />
-                : <div className={style.wrapper} dangerouslySetInnerHTML={{__html: pageText}}/>
+                :
+                <div className={style.wrapper} dangerouslySetInnerHTML={{__html: pageText}}/>
         }
     </div>
 }
