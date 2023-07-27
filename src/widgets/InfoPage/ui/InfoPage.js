@@ -9,6 +9,7 @@ export const InfoPage = () => {
     const {spaceId} = useParams()
     const {pageId} = useParams()
     const [isEditMode, setIsEditMode] = useState(false)
+    //перенести в modal
     const [page, setPage] = useState({})
     const [pageText, setPageText] = useState("");
     const [tmpPageText, setTmpPageText] = useState("");
@@ -21,6 +22,7 @@ export const InfoPage = () => {
     useEffect(() => {
         if (!!pageId) {
             console.log("LOAD PAGE #" + pageId)
+            //это тоже а то шо бля а ?
             getPage(spaceId, pageId, (e) => {
                 setPage(e);
                 setPageText(e['html'])

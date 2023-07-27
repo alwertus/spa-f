@@ -6,6 +6,7 @@ import {ReactComponent as ArrowDown} from "../../../shared/ui/img/arrow-down.svg
 
 export const WysiwygEditor = ({text, setText, hasUnsavedChanges}) => {
     const [mode, setMode] = useState("edit")
+    const [tmpText, setTmpText] = useState(text)
 
     return <div className={`${style.wrapper} ${hasUnsavedChanges ? style.needToSave : style.notNeedToSave}`}>
         <div className={style.buttonGroup}>
@@ -23,15 +24,18 @@ export const WysiwygEditor = ({text, setText, hasUnsavedChanges}) => {
             mode === "edit"
                 ?
                 <div
-                    dangerouslySetInnerHTML={{ __html: text }}
+                    dangerouslySetInnerHTML={{ __html: tmpText }}
                     contentEditable
-                    onBlur={(e) => setText(e.target.innerHTML)}
+                    onInput={(e) => setText(e.currentTarget.innerHTML)}
                 />
                 :
                 <textarea
-                className={style.editor}
-                value={text}
-                onChange={e => setText(e.target.value)}
+                    className={style.editor}
+                    value={text}
+                    onChange={e => {
+                        setText(e.target.value)
+                        setTmpText(e.target.value)
+                    }}
                 />
         }
     </div>
