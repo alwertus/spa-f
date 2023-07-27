@@ -8,7 +8,7 @@ export const WysiwygEditor = ({text, setText, hasUnsavedChanges}) => {
     const [mode, setMode] = useState("edit")
     const [tmpText, setTmpText] = useState(text)
 
-    return <div className={`${style.wrapper} ${hasUnsavedChanges ? style.needToSave : style.notNeedToSave}`}>
+    return <div>
         <div className={style.buttonGroup}>
             <div className={style.showCode}>
                 <ButtonComp
@@ -24,19 +24,22 @@ export const WysiwygEditor = ({text, setText, hasUnsavedChanges}) => {
             mode === "edit"
                 ?
                 <div
+                    className={`${style.wrapper} ${hasUnsavedChanges ? style.needToSave : style.notNeedToSave}`}
                     dangerouslySetInnerHTML={{ __html: tmpText }}
                     contentEditable
                     onInput={(e) => setText(e.currentTarget.innerHTML)}
                 />
                 :
-                <textarea
-                    className={style.editor}
-                    value={text}
-                    onChange={e => {
-                        setText(e.target.value)
-                        setTmpText(e.target.value)
-                    }}
-                />
+                <div className={`${style.wrapper} ${hasUnsavedChanges ? style.needToSave : style.notNeedToSave}`}>
+                    <textarea
+                        className={style.editor}
+                        value={text}
+                        onChange={e => {
+                            setText(e.target.value)
+                            setTmpText(e.target.value)
+                        }}
+                    />
+                </div>
         }
     </div>
 }

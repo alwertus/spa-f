@@ -4,30 +4,23 @@ import {useParams} from "react-router-dom";
 import {getPage, savePage} from "../api/actions";
 import {ButtonComp} from "../../../shared/ui/Button/ButtonComp";
 import {WysiwygEditor} from "../../../features/WysiwygEditor";
+import {InfoPageData} from "../model/InfoPageData";
 
 export const InfoPage = () => {
     const {spaceId} = useParams()
     const {pageId} = useParams()
     const [isEditMode, setIsEditMode] = useState(false)
-    //перенести в modal
-    const [page, setPage] = useState({})
-    const [pageText, setPageText] = useState("");
-    const [tmpPageText, setTmpPageText] = useState("");
 
-    const setHtml = (newValue) => {
-        setPageText(newValue)
-        setTmpPageText(newValue)
-    }
+    const {
+        setPageData,
+        data,
+        setHtml,
+    } = InfoPageData()
 
     useEffect(() => {
         if (!!pageId) {
             console.log("LOAD PAGE #" + pageId)
-            //это тоже а то шо бля а ?
-            getPage(spaceId, pageId, (e) => {
-                setPage(e);
-                setPageText(e['html'])
-                setTmpPageText(e['html'])
-            })
+            getPage(spaceId, pageId, setPageData)
         }
     },[pageId])
 
@@ -45,8 +38,8 @@ export const InfoPage = () => {
                 <ButtonComp
                     text={"save"}
                     onClick={() => {
-                        savePage(spaceId, pageId, pageText, setHtml)
-                        setTmpPageText(pageText)
+                        savePage(spaceId, pageId, data.pageText, setHtml)
+                        data.setTmpPageText(data.pageText)
                     }}
                 />
             )}
@@ -55,12 +48,12 @@ export const InfoPage = () => {
         {
             isEditMode
                 ? <WysiwygEditor
-                    text={pageText}
-                    setText={setPageText}
-                    hasUnsavedChanges={pageText !== tmpPageText}
+                    text={data.pageText}
+                    setText={data.setPageText}
+                    hasUnsavedChanges={data.pageText !== data.tmpPageText}
                 />
                 :
-                <div className={style.wrapper} dangerouslySetInnerHTML={{__html: pageText}}/>
+                <div className={style.wrapper} dangerouslySetInnerHTML={{__html: data.pageText}}/>
         }
     </div>
 }
